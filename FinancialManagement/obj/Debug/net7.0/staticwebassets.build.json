@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "fialPrpCNuZ2ep2zB9MR81wrNeJyqLbtVaNAsMV8cdY=",
+  "Source": "FinancialManagement",
+  "BasePath": "_content/FinancialManagement",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "FinancialManagement\\wwwroot",
+      "Source": "FinancialManagement",
+      "ContentRoot": "C:\\Users\\Bartosz\\OneDrive\\Desktop\\C# nauka\\FinancialManagement\\FinancialManagement\\wwwroot\\",
+      "BasePath": "_content/FinancialManagement",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Bartosz\\OneDrive\\Desktop\\C# nauka\\FinancialManagement\\FinancialManagement\\wwwroot\\MainStyle.css",
+      "SourceId": "FinancialManagement",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Bartosz\\OneDrive\\Desktop\\C# nauka\\FinancialManagement\\FinancialManagement\\wwwroot\\",
+      "BasePath": "_content/FinancialManagement",
+      "RelativePath": "MainStyle.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\MainStyle.css"
+    }
+  ]
+}
