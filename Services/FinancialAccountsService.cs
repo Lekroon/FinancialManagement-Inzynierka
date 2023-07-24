@@ -94,7 +94,15 @@ public class FinancialAccountsService : IFinancialAccountsService
         }
 
         return allFinancialAccountsList
-            .Where(account => account.AccountName != null && account.AccountName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            .Where(account => account.AccountName != null && account.AccountName.Contains(searchString, 
+                StringComparison.OrdinalIgnoreCase))
             .ToList();
+    }
+
+    public List<FinancialAccountResponse> GetSortedFinancialAccounts(List<FinancialAccountResponse> allAccounts, 
+        string sortBy, 
+        string sortOrder)
+    {
+        throw new NotImplementedException();
     }
 }
