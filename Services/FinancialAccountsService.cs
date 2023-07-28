@@ -2,6 +2,7 @@
 using Entities;
 using ServiceContracts;
 using ServiceContracts.DTO;
+using ServiceContracts.Enums;
 using Services.Helpers;
 
 namespace Services;
@@ -101,7 +102,7 @@ public class FinancialAccountsService : IFinancialAccountsService
 
     public List<FinancialAccountResponse> GetSortedFinancialAccounts(List<FinancialAccountResponse> allAccounts, 
         string sortBy, 
-        string sortOrder)
+        SortOrderOptions sortOrder)
     {
         throw new NotImplementedException();
     }

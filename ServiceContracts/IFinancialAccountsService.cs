@@ -1,4 +1,5 @@
 ﻿using ServiceContracts.DTO;
+using ServiceContracts.Enums;
 
 namespace ServiceContracts;
 
@@ -19,8 +20,14 @@ public interface IFinancialAccountsService
     /// <returns></returns>
     public List<FinancialAccountResponse> GetFilteredFinancialAccounts(string? searchString);
     
-    
+    /// <summary>
+    /// Returns sorted list of financial accounts
+    /// </summary>
+    /// <param name="allAccounts">List of accounts to sort</param>
+    /// <param name="sortBy">Name of the property, based on which financial accounts will be sorted</param>
+    /// <param name="sortOrder">Ascend, or Descend (Asc, Desc)</param>
+    /// <returns>Sorted list of financial accounts</returns>
     public List<FinancialAccountResponse> GetSortedFinancialAccounts(List<FinancialAccountResponse> allAccounts,
         string sortBy,
-        string sortOrder);
+        SortOrderOptions sortOrder);
 }
