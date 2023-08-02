@@ -10,10 +10,24 @@ namespace Services;
 public class FinancialAccountsService : IFinancialAccountsService
 {
     private readonly List<FinancialAccount> _listOfAccounts;
+    private readonly CurrenciesService _currenciesService;
+    private readonly UsersService _usersService;
 
     public FinancialAccountsService()
     {
         _listOfAccounts = new List<FinancialAccount>();
+        _currenciesService = new CurrenciesService();
+        _usersService = new UsersService();
+    }
+
+    private FinancialAccountResponse ConvertFinancialAccountToFinancialAccountResponse(FinancialAccount financialAccount)
+    {
+        FinancialAccountResponse financialAccountResponse = financialAccount.ToFinancialAccountResponse();
+        
+        financialAccountResponse.CurrencyName = _currenciesService.GetCurrencyByCurrencyId(financialAccount.CurrencyId)?.CurrencyName;
+        financialAccountResponse.UserLogin = _usersService.GetUserByUserId(financialAccount.UserId)?.Login;
+        
+        return financialAccountResponse;
     }
 
     public FinancialAccountResponse AddFinancialAccount(FinancialAccountAddRequest? financialAccountAddRequest)
@@ -56,26 +70,26 @@ public class FinancialAccountsService : IFinancialAccountsService
 
         _listOfAccounts.Add(financialAccount);
 
-        return financialAccount.ToUserFinancialAccountResponse();
+        return ConvertFinancialAccountToFinancialAccountResponse(financialAccount);
     }
 
     public List<FinancialAccountResponse> GetAllFinancialAccounts()
     {
-        return _listOfAccounts.Select(financialAccount => financialAccount.ToUserFinancialAccountResponse()).ToList();
+        return _listOfAccounts.Select(financialAccount => financialAccount.ToFinancialAccountResponse()).ToList();
     }
 
     public FinancialAccountResponse? GetFinancialAccountById(Guid? financialAccountId, Guid? userId)
     {
         return _listOfAccounts.FirstOrDefault(financialAccount => financialAccount.UserId == userId &&
                                                                   financialAccount.AccountId == financialAccountId)?
-            .ToUserFinancialAccountResponse();
+            .ToFinancialAccountResponse();
     }
 
     public FinancialAccountResponse? GetFinancialAccountByName(string? financialAccountName, Guid? userId)
     {
         return _listOfAccounts.FirstOrDefault(financialAccount => financialAccount.UserId == userId &&
                                                                   financialAccount.AccountName == financialAccountName)?
-            .ToUserFinancialAccountResponse();
+            .ToFinancialAccountResponse();
     }
 
     public List<FinancialAccountResponse> GetFilteredFinancialAccounts(string? searchString)
@@ -104,6 +118,37 @@ public class FinancialAccountsService : IFinancialAccountsService
         string sortBy, 
         SortOrderOptions sortOrder)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrWhiteSpace(sortBy))
+        {
+            return allAccounts;
+        }
+        
+        var sortedFinancialAccounts = (sortBy, sortOrder) switch
+        {
+            (nameof(FinancialAccountResponse.AccountName), SortOrderOptions.Asc) =>
+                allAccounts.OrderBy(account => account.AccountName, StringComparer.OrdinalIgnoreCase).ToList(),
+            (nameof(FinancialAccountResponse.AccountName), SortOrderOptions.Desc) =>
+                allAccounts.OrderByDescending(account => account.AccountName, StringComparer.OrdinalIgnoreCase)
+                    .ToList(),
+        
+            (nameof(FinancialAccountResponse.Balance), SortOrderOptions.Asc) =>
+                allAccounts.OrderBy(account => account.Balance).ToList(),
+            (nameof(FinancialAccountResponse.Balance), SortOrderOptions.Desc) =>
+                allAccounts.OrderByDescending(account => account.Balance).ToList(),
+
+            (nameof(FinancialAccountResponse.CurrencyName), SortOrderOptions.Asc) =>
+                allAccounts.OrderBy(account => account.CurrencyName, StringComparer.OrdinalIgnoreCase).ToList(),
+            (nameof(FinancialAccountResponse.CurrencyName), SortOrderOptions.Desc) =>
+                allAccounts.OrderByDescending(account => account.CurrencyName, StringComparer.OrdinalIgnoreCase).ToList(),
+            
+            (nameof(FinancialAccountResponse.UserLogin), SortOrderOptions.Asc) =>
+                allAccounts.OrderBy(account => account.UserLogin, StringComparer.OrdinalIgnoreCase).ToList(),
+            (nameof(FinancialAccountResponse.UserLogin), SortOrderOptions.Desc) =>
+                allAccounts.OrderByDescending(account => account.UserLogin, StringComparer.OrdinalIgnoreCase).ToList(),
+            
+            _ => allAccounts
+        };
+
+        return sortedFinancialAccounts;
     }
 }

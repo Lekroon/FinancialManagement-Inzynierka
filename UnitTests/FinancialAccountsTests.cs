@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using ServiceContracts.Enums;
 using Xunit.Abstractions;
 
 namespace UnitTests;
@@ -724,6 +725,56 @@ public class FinancialAccountsTests
     }    
     
     #endregion
+    
+    #region GetSortedFinancialAccounts
+    
+    // When sorted based on eg. financials account balance ascending, it should return sorted financial accounts
+    [Fact]
+    public void GetSortedFinancialAccounts()
+    {
+        // Arrange
+        GenerateFinancialAccounts();
+        var generatedFinancialAccounts = _financialAccountsService.GetAllFinancialAccounts();
+        
+        // Act
+        var sortedFinancialAccounts = _financialAccountsService.GetSortedFinancialAccounts(
+            generatedFinancialAccounts,
+            nameof(FinancialAccount.AccountName),
+            SortOrderOptions.Asc);
+        
+        _testOutputHelper.WriteLine("Created financial accounts:\n");
+        foreach (var financialAccount in generatedFinancialAccounts)
+        {
+            _testOutputHelper.WriteLine(financialAccount + "\n");
+        }
+        
+        _testOutputHelper.WriteLine("\nExpected sorted financial accounts:\n");
+        
+        var expectedSortedFinancialAccounts = generatedFinancialAccounts
+            .OrderBy(account => account.AccountName)
+            .ToList();
+        
+        foreach (var expectedSortedAccount in expectedSortedFinancialAccounts)
+        {
+            _testOutputHelper.WriteLine(expectedSortedAccount + "\n");
+        }
+        
+        _testOutputHelper.WriteLine("---------------------------------------------------------");
+
+        _testOutputHelper.WriteLine("Sorted financial accounts:\n");
+        foreach (var sortedFinancialAccount in sortedFinancialAccounts)
+        {
+            _testOutputHelper.WriteLine(sortedFinancialAccount + "\n");
+        }
+        
+        // Assert
+        for (var i = 0; i < expectedSortedFinancialAccounts.Count; i++)
+        {
+            Assert.Equal(expectedSortedFinancialAccounts[i], sortedFinancialAccounts[i]);
+        }
+    }
+    
+    #endregion
 
     #region Private methods
 
@@ -797,41 +848,41 @@ public class FinancialAccountsTests
         {
             new()
             {
-                AccountName = "MojePierwszeKonto",
+                AccountName = "ZobaczMojePierwszeKonto",
                 Balance = 3000.15m,
                 CurrencyId = currenciesResponseList[0].CurrencyId,
                 UserId = userResponseList[0].UserId
             },
             new()
             {
-                AccountName = "MeineErsterAccount",
+                AccountName = "AToMeineErsterAccount",
                 Balance = 150,
                 CurrencyId = currenciesResponseList[1].CurrencyId,
                 UserId = userResponseList[1].UserId
             },
             new()
             {
-                AccountName = "MyFirstAccount",
+                AccountName = "BooMyFirstAccount",
                 Balance = 10000.973m,
                 CurrencyId = currenciesResponseList[2].CurrencyId,
                 UserId = userResponseList[2].UserId
             },
             new()
             {
-                AccountName = "MojeDrugieKonto",
+                AccountName = "DoSortowania-MojeDrugieKonto",
                 Balance = 420,
                 CurrencyId = currenciesResponseList[0].CurrencyId,
                 UserId = userResponseList[0].UserId
             },
             new()
             {
-                AccountName = "MySecondAccount",
+                AccountName = "ItsMySecondAccount",
                 Balance = 999.88m,
                 CurrencyId = currenciesResponseList[2].CurrencyId,
                 UserId = userResponseList[2].UserId
             }
         };
-        var financialAccountResponseList = new List<FinancialAccountResponse>
+        var createdFinancialAccounts = new List<FinancialAccountResponse>
         {
             _financialAccountsService.AddFinancialAccount(financialAccountAddRequestList[0]),
             _financialAccountsService.AddFinancialAccount(financialAccountAddRequestList[1]),

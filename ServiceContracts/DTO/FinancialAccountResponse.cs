@@ -6,7 +6,9 @@ public class FinancialAccountResponse
 {
     public Guid? AccountId { get; set; }
     public Guid? UserId { get; set; }
+    public string? UserLogin { get; set; }
     public Guid? CurrencyId { get; set; }
+    public string? CurrencyName { get; set; }
     public string? AccountName { get; set; }
     public decimal? Balance { get; set; }
 
@@ -33,28 +35,20 @@ public class FinancialAccountResponse
 
     public override int GetHashCode()
     {
-        var hashCode = new HashCode();
-        
-        hashCode.Add(AccountId);
-        hashCode.Add(UserId);
-        hashCode.Add(CurrencyId);
-        hashCode.Add(AccountName);
-        hashCode.Add(Balance);
-
-        return hashCode.ToHashCode();
+        return base.GetHashCode();
     }
 
     public override string ToString()
     {
         return
             $"AccountId:{AccountId}, UserId:{UserId}, CurrencyId:{CurrencyId}, " +
-            $"AccountName:{AccountName}, Balance:{Balance}";
+            $"AccountName:{AccountName}, Balance:{Balance}, CurrencyName:{CurrencyName}, UserLogin:{UserLogin}";
     }
 }
 
 public static class FinancialAccountExtensions
 {
-    public static FinancialAccountResponse ToUserFinancialAccountResponse(this FinancialAccount financialAccount)
+    public static FinancialAccountResponse ToFinancialAccountResponse(this FinancialAccount financialAccount)
     {
         return new FinancialAccountResponse
         {
