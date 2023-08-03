@@ -1,4 +1,5 @@
 ﻿using ServiceContracts.DTO;
+using ServiceContracts.DTO.FinancialAccount;
 using ServiceContracts.Enums;
 
 namespace ServiceContracts;

@@ -1,6 +1,7 @@
 ﻿using Entities;
 using ServiceContracts;
 using ServiceContracts.DTO;
+using ServiceContracts.DTO.Currency;
 using Services.Helpers;
 
 namespace Services;

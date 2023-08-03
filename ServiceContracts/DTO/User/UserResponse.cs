@@ -1,6 +1,4 @@
-﻿using Entities;
-
-namespace ServiceContracts.DTO;
+﻿namespace ServiceContracts.DTO.User;
 
 /// <summary>
 /// DTO class that is used as return type for most of UsersService methods
@@ -63,7 +61,7 @@ public class UserResponse
 
 public static class UserExtensions
 {
-    public static UserResponse ToUserResponse(this User user)
+    public static UserResponse ToUserResponse(this Entities.User user)
     {
         return new UserResponse
         {

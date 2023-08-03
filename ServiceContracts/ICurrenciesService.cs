@@ -1,4 +1,5 @@
 ﻿using ServiceContracts.DTO;
+using ServiceContracts.DTO.Currency;
 
 namespace ServiceContracts;
 

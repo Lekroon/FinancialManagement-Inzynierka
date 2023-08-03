@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Entities;
 
-namespace ServiceContracts.DTO;
+namespace ServiceContracts.DTO.User;
 
 /// <summary>
 /// DTO class for adding new User
@@ -29,9 +28,9 @@ public class UserAddRequest
     [Required]
     public bool? IsActive { get; set; }
 
-    public User ToUser()
+    public Entities.User ToUser()
     {
-        return new User
+        return new Entities.User
         {
             Login = Login,
             Password = Password,

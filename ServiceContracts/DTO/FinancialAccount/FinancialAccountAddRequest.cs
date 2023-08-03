@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Entities;
 
-namespace ServiceContracts.DTO;
+namespace ServiceContracts.DTO.FinancialAccount;
 
 public class FinancialAccountAddRequest
 {
@@ -19,9 +18,9 @@ public class FinancialAccountAddRequest
     [Range(0, double.MaxValue, ErrorMessage = "Balance cannot be negative")]
     public decimal? Balance { get; set; }
 
-    public FinancialAccount ToFinancialAccount()
+    public Entities.FinancialAccount ToFinancialAccount()
     {
-        return new FinancialAccount
+        return new Entities.FinancialAccount
         {
             UserId = UserId,
             CurrencyId = CurrencyId,

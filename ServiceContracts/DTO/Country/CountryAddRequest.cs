@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Entities;
 
-namespace ServiceContracts.DTO;
+namespace ServiceContracts.DTO.Country;
 
 /// <summary>
 /// DTO class for adding new User
@@ -15,9 +14,9 @@ public class CountryAddRequest
     [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Use letters only!")]
     public string? CountryName { get; set; }
 
-    public Country ToCountry()
+    public Entities.Country ToCountry()
     {
-        return new Country
+        return new Entities.Country
         {
             CountryName = CountryName,
             CountryCurrency = CountryCurrency

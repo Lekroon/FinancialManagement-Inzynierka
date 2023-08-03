@@ -1,6 +1,4 @@
-﻿using Entities;
-
-namespace ServiceContracts.DTO;
+﻿namespace ServiceContracts.DTO.FinancialAccount;
 
 public class FinancialAccountResponse
 {
@@ -48,7 +46,7 @@ public class FinancialAccountResponse
 
 public static class FinancialAccountExtensions
 {
-    public static FinancialAccountResponse ToFinancialAccountResponse(this FinancialAccount financialAccount)
+    public static FinancialAccountResponse ToFinancialAccountResponse(this Entities.FinancialAccount financialAccount)
     {
         return new FinancialAccountResponse
         {

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Entities;
 
-namespace ServiceContracts.DTO;
+namespace ServiceContracts.DTO.Currency;
 
 public class CurrencyAddRequest
 {
@@ -9,9 +8,9 @@ public class CurrencyAddRequest
     [RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Use letters only!")]
     public string? CurrencyName { get; set; }
 
-    public Currency ToCurrency()
+    public Entities.Currency ToCurrency()
     {
-        return new Currency
+        return new Entities.Currency
         {
             CurrencyName = CurrencyName
         };

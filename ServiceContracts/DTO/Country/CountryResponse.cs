@@ -1,6 +1,4 @@
-﻿using Entities;
-
-namespace ServiceContracts.DTO;
+﻿namespace ServiceContracts.DTO.Country;
 
 public class CountryResponse
 {
@@ -44,7 +42,7 @@ public class CountryResponse
 
 public static class CountryExtension
 {
-    public static CountryResponse ToCountryResponse(this Country country)
+    public static CountryResponse ToCountryResponse(this Entities.Country country)
     {
         return new CountryResponse
         {

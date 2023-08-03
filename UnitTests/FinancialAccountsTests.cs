@@ -1,6 +1,10 @@
 ﻿using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using ServiceContracts.DTO.Country;
+using ServiceContracts.DTO.Currency;
+using ServiceContracts.DTO.FinancialAccount;
+using ServiceContracts.DTO.User;
 using ServiceContracts.Enums;
 using Xunit.Abstractions;
 

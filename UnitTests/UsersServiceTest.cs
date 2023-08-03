@@ -1,4 +1,7 @@
-﻿using Xunit.Abstractions;
+﻿using ServiceContracts.DTO.Country;
+using ServiceContracts.DTO.Currency;
+using ServiceContracts.DTO.User;
+using Xunit.Abstractions;
 
 namespace UnitTests;
 

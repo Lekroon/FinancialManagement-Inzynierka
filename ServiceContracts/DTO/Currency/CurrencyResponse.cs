@@ -1,6 +1,4 @@
-﻿using Entities;
-
-namespace ServiceContracts.DTO;
+﻿namespace ServiceContracts.DTO.Currency;
 
 public class CurrencyResponse
 {
@@ -41,7 +39,7 @@ public class CurrencyResponse
 
 public static class CurrencyExtension
 {
-    public static CurrencyResponse ToCurrencyResponse(this Currency currency)
+    public static CurrencyResponse ToCurrencyResponse(this Entities.Currency currency)
     {
         return new CurrencyResponse
         {
