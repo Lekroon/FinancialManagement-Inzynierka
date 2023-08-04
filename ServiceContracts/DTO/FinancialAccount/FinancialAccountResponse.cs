@@ -42,6 +42,16 @@ public class FinancialAccountResponse
             $"AccountId:{AccountId}, UserId:{UserId}, CurrencyId:{CurrencyId}, " +
             $"AccountName:{AccountName}, Balance:{Balance}, CurrencyName:{CurrencyName}, UserLogin:{UserLogin}";
     }
+
+    public FinancialAccountUpdateRequest ToFinancialAccountUpdateRequest()
+    {
+        return new FinancialAccountUpdateRequest
+        {
+            AccountId = AccountId,
+            AccountName = AccountName,
+            Balance = Balance
+        };
+    }
 }
 
 public static class FinancialAccountExtensions

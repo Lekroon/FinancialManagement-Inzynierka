@@ -152,4 +152,9 @@ public class FinancialAccountsService : IFinancialAccountsService
 
         return sortedFinancialAccounts;
     }
+
+    public FinancialAccountResponse UpdateFinancialAccount(FinancialAccountUpdateRequest? accountUpdateRequest)
+    {
+        throw new NotImplementedException();
+    }
 }

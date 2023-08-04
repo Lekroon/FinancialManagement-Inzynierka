@@ -1,7 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Text.RegularExpressions;
-using ServiceContracts.DTO.Country;
+﻿using ServiceContracts.DTO.Country;
 using ServiceContracts.DTO.Currency;
 using ServiceContracts.DTO.FinancialAccount;
 using ServiceContracts.DTO.User;
@@ -778,6 +775,86 @@ public class FinancialAccountsTests
         }
     }
     
+    #endregion
+
+    #region UpdateFinancialAccount
+
+    /*
+     * Test requirements:
+     * 1. When FinancialAccountUpdateRequest is null, it should throw ArgumentNullException
+     * 2. When AccountId is null or invalid, it should throw ArgumentException
+     * 3. When AccountName is null or invalid, it should throw ArgumentException
+     * 4. When Balance is null or invalid, it should throw ArgumentException
+     */
+    
+    // 1. FinancialAccountUpdateRequest is null
+    [Fact]
+    public void UpdateFinancialAccount_FinancialAccountUpdateRequestIsNull()
+    {
+        // Arrange
+        FinancialAccountUpdateRequest? accountUpdateRequest = null;
+        
+        // Assert
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            _financialAccountsService.UpdateFinancialAccount(accountUpdateRequest);
+        });
+    }
+    
+    // 2. AccountId is null or invalid
+    [Fact]
+    public void UpdateFinancialAccount_AccountIdIsInvalid()
+    {
+        // Arrange
+        var accountUpdateRequest = new FinancialAccountUpdateRequest
+        {
+            AccountId = Guid.NewGuid(),
+            AccountName = "Upd4ted AccountName"
+        };
+        
+        // Assert
+        Assert.Throws<ArgumentException>(() =>
+        {
+            _financialAccountsService.UpdateFinancialAccount(accountUpdateRequest);
+        });
+    }
+    
+    // 3. AccountName is null or invalid
+    [Fact]
+    public void UpdateFinancialAccount_AccountNameIsNullOrInvalid()
+    {
+        // Arrange
+        var accountUpdateRequest = new FinancialAccountUpdateRequest
+        {
+            AccountName = null,
+        };
+        
+        // Assert
+        Assert.Throws<ArgumentException>(() =>
+        {
+            _financialAccountsService.UpdateFinancialAccount(accountUpdateRequest);
+        });
+    }
+    
+    // 4. Balance is null or invalid
+    [Fact]
+    public void UpdateFinancialAccount_BalanceIsNullOrInvalid()
+    {
+        // Arrange
+        var accountUpdateRequest = new FinancialAccountUpdateRequest
+        {
+            Balance = -0.5m
+        };
+        
+        // Assert
+        Assert.Throws<ArgumentException>(() =>
+        {
+            _financialAccountsService.UpdateFinancialAccount(accountUpdateRequest);
+        });
+    }
+    
+    
+
     #endregion
 
     #region Private methods

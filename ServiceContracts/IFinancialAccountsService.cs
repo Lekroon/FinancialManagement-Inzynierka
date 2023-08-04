@@ -31,4 +31,11 @@ public interface IFinancialAccountsService
     public List<FinancialAccountResponse> GetSortedFinancialAccounts(List<FinancialAccountResponse> allAccounts,
         string sortBy,
         SortOrderOptions sortOrder);
+
+    /// <summary>
+    /// Updates specified financial account details based on given account ID
+    /// </summary>
+    /// <param name="accountUpdateRequest">Account details to update (incl. AccountId)</param>
+    /// <returns>Updated FinancialAccountResponse object</returns>
+    public FinancialAccountResponse UpdateFinancialAccount(FinancialAccountUpdateRequest? accountUpdateRequest);
 }
