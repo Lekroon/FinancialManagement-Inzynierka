@@ -79,10 +79,9 @@ public class FinancialAccountsService : IFinancialAccountsService
         return _listOfAccounts.Select(financialAccount => financialAccount.ToFinancialAccountResponse()).ToList();
     }
 
-    public FinancialAccountResponse? GetFinancialAccountById(Guid? financialAccountId, Guid? userId)
+    public FinancialAccountResponse? GetFinancialAccountById(Guid? financialAccountId)
     {
-        return _listOfAccounts.FirstOrDefault(financialAccount => financialAccount.UserId == userId &&
-                                                                  financialAccount.AccountId == financialAccountId)?
+        return _listOfAccounts.FirstOrDefault(financialAccount => financialAccount.AccountId == financialAccountId)?
             .ToFinancialAccountResponse();
     }
 

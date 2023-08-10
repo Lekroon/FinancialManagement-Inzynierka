@@ -10,7 +10,7 @@ public interface IFinancialAccountsService
 
     public List<FinancialAccountResponse> GetAllFinancialAccounts();
 
-    public FinancialAccountResponse? GetFinancialAccountById(Guid? financialAccountId, Guid? userId);
+    public FinancialAccountResponse? GetFinancialAccountById(Guid? financialAccountId);
 
     public FinancialAccountResponse? GetFinancialAccountByName(string? financialAccountName, Guid? userId);
 
