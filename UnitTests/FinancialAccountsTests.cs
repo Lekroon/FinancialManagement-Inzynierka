@@ -872,7 +872,8 @@ public class FinancialAccountsTests
                                     $"Account name: {accountUpdateRequest.AccountName}\n" +
                                     $"Balance: {accountUpdateRequest.Balance}\n");
 
-        accountUpdateRequest.AccountName = null;
+        // more than 60 characters
+        accountUpdateRequest.AccountName = "0123456789012345678901234567890123456789012345678901234567890123456789";
         
         // Assert
         Assert.Throws<ArgumentException>(() =>
@@ -935,7 +936,8 @@ public class FinancialAccountsTests
                                     $"Account name: {accountUpdateRequest.AccountName}\n" +
                                     $"Balance: {accountUpdateRequest.Balance}\n");
 
-        accountUpdateRequest.Balance = -50;
+        accountUpdateRequest.AccountName = "Modified";
+        accountUpdateRequest.Balance = null;
         
         // Assert
         Assert.Throws<ArgumentException>(() =>
@@ -1002,7 +1004,7 @@ public class FinancialAccountsTests
 
         var updatedAccountResponse = _financialAccountsService.UpdateFinancialAccount(accountUpdateRequest);
         
-        _testOutputHelper.WriteLine("\n\nUPDATED FINANCIAL ACCOUNT:");
+        _testOutputHelper.WriteLine("\nUPDATED FINANCIAL ACCOUNT:");
         _testOutputHelper.WriteLine($"Account ID: {updatedAccountResponse.AccountId}\n" +
                                     $"Account name: {updatedAccountResponse.AccountName}\n" +
                                     $"Balance: {updatedAccountResponse.Balance}\n");

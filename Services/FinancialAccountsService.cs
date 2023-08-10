@@ -154,6 +154,25 @@ public class FinancialAccountsService : IFinancialAccountsService
 
     public FinancialAccountResponse UpdateFinancialAccount(FinancialAccountUpdateRequest? accountUpdateRequest)
     {
-        throw new NotImplementedException();
+        if (accountUpdateRequest == null)
+        {
+            throw new ArgumentNullException(nameof(accountUpdateRequest));
+        }
+        
+        ValidationHelper.ModelValidation(accountUpdateRequest);
+        
+        // financial account object to update
+        var matchingAccount = _listOfAccounts.FirstOrDefault(account => account.AccountId == accountUpdateRequest.AccountId);
+
+        if (matchingAccount == null)
+        {
+            throw new ArgumentException("Given financial account ID doesn't exist");
+        }
+        
+        // update financial account
+        matchingAccount.AccountName = accountUpdateRequest.AccountName;
+        matchingAccount.Balance = accountUpdateRequest.Balance;
+
+        return matchingAccount.ToFinancialAccountResponse();
     }
 }
