@@ -175,4 +175,21 @@ public class FinancialAccountsService : IFinancialAccountsService
 
         return matchingAccount.ToFinancialAccountResponse();
     }
+
+    public bool DeleteFinancialAccount(Guid? financialAccountId)
+    {
+        if (financialAccountId == null)
+        {
+            throw new ArgumentNullException(nameof(financialAccountId));
+        }
+
+        var foundAccount = _listOfAccounts.FirstOrDefault(account => account.AccountId == financialAccountId);
+
+        if (foundAccount == null)
+            return false;
+
+        _listOfAccounts.RemoveAll(account => account.AccountId == financialAccountId);
+
+        return true;
+    }
 }

@@ -1018,6 +1018,81 @@ public class FinancialAccountsTests
 
     #endregion
 
+    #region DeleteFinancialAccount
+
+    /*
+     * Test requirements:
+     * 1. If given id is invalid, it should return false
+     * 2. If given id is valid, it should return true and delete existing financial account
+     */
+
+    // 1. Given id is invalidvalid
+    [Fact]
+    public void DeleteFinancialAccount_InvalidAccountId()
+    {
+        // Arrange
+        var invalidId = Guid.NewGuid();
+        
+        // Act
+        var isDeleted = _financialAccountsService.DeleteFinancialAccount(invalidId);
+        
+        // Assert
+        Assert.False(isDeleted);
+    }
+    
+    // 2. Given id is valid
+    [Fact]
+    public void DeleteFinancialAccount_ValidAccountId()
+    {
+        // Arrange
+        // creating account
+        var currencyAddRequest = new CurrencyAddRequest
+        {
+            CurrencyName = "PLN"
+        };
+        var currencyResponse = _currenciesService.AddCurrency(currencyAddRequest);
+
+        var countryAddRequest = new CountryAddRequest
+        {
+            CountryCurrency = currencyResponse.CurrencyId,
+            CountryName = "Poland"
+        };
+        var countryResponse = _countriesService.AddCountry(countryAddRequest);
+
+        var userAddRequest = new UserAddRequest
+        {
+            CountryId = countryResponse.CountryId,
+            Email = "jakistamMail@gmail.com",
+            IsActive = true,
+            Login = "MojLogin123!",
+            Password = "123456789"
+        };
+        var userResponse = _usersService.AddUser(userAddRequest);
+
+        var accountAddRequest = new FinancialAccountAddRequest
+        {
+            AccountName = "Nazwa przed modyfikacją",
+            Balance = 1000.50m,
+            CurrencyId = currencyResponse.CurrencyId,
+            UserId = userResponse.UserId
+        };
+        var accountResponse = _financialAccountsService.AddFinancialAccount(accountAddRequest);
+        
+        _testOutputHelper.WriteLine("GENERATED OBJECTS:");
+        _testOutputHelper.WriteLine("1. CURRENCY:\n" + currencyResponse);
+        _testOutputHelper.WriteLine("2. COUNTRY:\n" + countryResponse);
+        _testOutputHelper.WriteLine("3. USER:\n" + userResponse);
+        _testOutputHelper.WriteLine("4. FINANCIAL ACCOUNT:\n" + accountResponse);
+        
+        // Act
+        var isDeleted = _financialAccountsService.DeleteFinancialAccount(accountResponse.AccountId);
+        
+        // Assert
+        Assert.True(isDeleted);
+    }
+
+    #endregion
+
     #region Private methods
 
     private void GenerateFinancialAccounts()

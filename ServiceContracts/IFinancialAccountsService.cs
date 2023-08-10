@@ -38,4 +38,11 @@ public interface IFinancialAccountsService
     /// <param name="accountUpdateRequest">Account details to update (incl. AccountId)</param>
     /// <returns>Updated FinancialAccountResponse object</returns>
     public FinancialAccountResponse UpdateFinancialAccount(FinancialAccountUpdateRequest? accountUpdateRequest);
+
+    /// <summary>
+    /// Deletes financial account based on given account ID
+    /// </summary>
+    /// <param name="financialAccountId">Id of account to delete</param>
+    /// <returns>True if account deleted successfully, otherwise False</returns>
+    public bool DeleteFinancialAccount(Guid? financialAccountId);
 }
