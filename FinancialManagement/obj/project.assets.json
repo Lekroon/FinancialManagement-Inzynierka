@@ -3265,6 +3265,19 @@
         "runtime": {
           "bin/placeholder/ServiceContracts.dll": {}
         }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "ServiceContracts": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Services.dll": {}
+        }
       }
     }
   },
@@ -9684,12 +9697,18 @@
       "type": "project",
       "path": "../ServiceContracts/ServiceContracts.csproj",
       "msbuildProject": "../ServiceContracts/ServiceContracts.csproj"
+    },
+    "Services/1.0.0": {
+      "type": "project",
+      "path": "../Services/Services.csproj",
+      "msbuildProject": "../Services/Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 7.0.9",
-      "ServiceContracts >= 1.0.0"
+      "ServiceContracts >= 1.0.0",
+      "Services >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -9721,6 +9740,9 @@
           "projectReferences": {
             "C:\\Users\\Bartosz\\OneDrive\\Desktop\\C# nauka\\FinancialManagement\\ServiceContracts\\ServiceContracts.csproj": {
               "projectPath": "C:\\Users\\Bartosz\\OneDrive\\Desktop\\C# nauka\\FinancialManagement\\ServiceContracts\\ServiceContracts.csproj"
+            },
+            "C:\\Users\\Bartosz\\OneDrive\\Desktop\\C# nauka\\FinancialManagement\\Services\\Services.csproj": {
+              "projectPath": "C:\\Users\\Bartosz\\OneDrive\\Desktop\\C# nauka\\FinancialManagement\\Services\\Services.csproj"
             }
           }
         }
