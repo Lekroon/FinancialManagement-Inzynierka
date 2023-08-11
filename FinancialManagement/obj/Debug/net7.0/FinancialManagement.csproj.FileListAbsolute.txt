@@ -219,3 +219,9 @@ C:\Users\Bartosz\OneDrive\Desktop\C# nauka\FinancialManagement\FinancialManageme
 C:\Users\Bartosz\OneDrive\Desktop\C# nauka\FinancialManagement\FinancialManagement\obj\Debug\net7.0\FinancialManagement.RazorAssemblyInfo.cache
 C:\Users\Bartosz\OneDrive\Desktop\C# nauka\FinancialManagement\FinancialManagement\obj\Debug\net7.0\FinancialManagement.RazorAssemblyInfo.cs
 C:\Users\Bartosz\OneDrive\Desktop\C# nauka\FinancialManagement\FinancialManagement\obj\Debug\net7.0\FinancialManagement.csproj.CopyComplete
+C:\Users\Bartosz\OneDrive\Desktop\C# nauka\FinancialManagement\FinancialManagement\bin\Debug\net7.0\Entities.dll
+C:\Users\Bartosz\OneDrive\Desktop\C# nauka\FinancialManagement\FinancialManagement\bin\Debug\net7.0\ServiceContracts.dll
+C:\Users\Bartosz\OneDrive\Desktop\C# nauka\FinancialManagement\FinancialManagement\bin\Debug\net7.0\Services.dll
+C:\Users\Bartosz\OneDrive\Desktop\C# nauka\FinancialManagement\FinancialManagement\bin\Debug\net7.0\ServiceContracts.pdb
+C:\Users\Bartosz\OneDrive\Desktop\C# nauka\FinancialManagement\FinancialManagement\bin\Debug\net7.0\Services.pdb
+C:\Users\Bartosz\OneDrive\Desktop\C# nauka\FinancialManagement\FinancialManagement\bin\Debug\net7.0\Entities.pdb
