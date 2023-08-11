@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
 using ServiceContracts;
+using ServiceContracts.Enums;
 
 namespace FinancialManagement.Controllers;
 
@@ -49,12 +50,20 @@ public class ListsController : Controller
     }
     
     [Route("accounts")]
-    public IActionResult Accounts(string? searchString)
+    public IActionResult Accounts(string? searchString, 
+        string sortBy = nameof(FinancialAccount.AccountName),
+        SortOrderOptions sortOrder = SortOrderOptions.Asc)
     {
+        // Search
         var allFinancialAccounts = _financialAccountsService.GetFilteredFinancialAccounts(searchString);
-
         ViewBag.SearchString = searchString ?? string.Empty;
         
-        return View(allFinancialAccounts);
+        // Sort
+        var sortedFinancialAccounts = 
+            _financialAccountsService.GetSortedFinancialAccounts(allFinancialAccounts, sortBy, sortOrder);
+        ViewBag.SortBy = sortBy;
+        ViewBag.SortOrder = sortOrder.ToString();
+        
+        return View(sortedFinancialAccounts);
     }
 }

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<FinancialAccountResponse>
+﻿@using Entities
+@model IEnumerable<FinancialAccountResponse>
 
 @{
     ViewBag.Title = "Financial account list";
@@ -14,8 +15,10 @@
 
         <div class="flex-1">
             <button class="button button-blue-back">Search</button>
-            <a style="text-decoration: none; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; cursor: default;" 
-               href="accounts" class="button button-red-back">Clear</a>
+            <a style="text-decoration: none; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; cursor: default;"
+               href="accounts" class="button button-red-back">
+                Clear
+            </a>
         </div>
     </div>
 
@@ -23,11 +26,76 @@
         <thead>
             <tr>
                 <th>Account ID</th>
-                <th>Account Name</th>
-                <th>Balance</th>
-                <th>Currency Code</th>
+                <th>
+                    @if (ViewBag.SortBy == nameof(FinancialAccountResponse.AccountName) && ViewBag.SortOrder == SortOrderOptions.Asc.ToString())
+                    {
+                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.AccountName)&sortOrder=@SortOrderOptions.Desc">
+                            Account Name
+                            <i class="fa-solid fa-sort-up"></i>
+                        </a>
+                    }
+                    else if (ViewBag.SortBy == nameof(FinancialAccountResponse.AccountName) && ViewBag.SortOrder == SortOrderOptions.Desc.ToString())
+                    {
+                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.AccountName)&sortOrder=@SortOrderOptions.Asc">
+                            Account Name
+                            <i class="fa-solid fa-sort-down"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.AccountName)&sortOrder=@SortOrderOptions.Desc">
+                            Account Name
+                        </a>
+                    }
+                </th>
+
+                <th>
+                    @if (ViewBag.SortBy == nameof(FinancialAccountResponse.Balance) && ViewBag.SortOrder == SortOrderOptions.Asc.ToString())
+                    {
+                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.Balance)&sortOrder=@SortOrderOptions.Desc">
+                            Balance
+                            <i class="fa-solid fa-sort-up"></i>
+                        </a>
+                    }
+                    else if (ViewBag.SortBy == nameof(FinancialAccountResponse.Balance) && ViewBag.SortOrder == SortOrderOptions.Desc.ToString())
+                    {
+                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.Balance)&sortOrder=@SortOrderOptions.Asc">
+                            Balance
+                            <i class="fa-solid fa-sort-down"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.Balance)&sortOrder=@SortOrderOptions.Desc">
+                            Balance
+                        </a>
+                    }
+                </th>
+
+                <th>
+                    @if (ViewBag.SortBy == nameof(FinancialAccountResponse.CurrencyName) && ViewBag.SortOrder == SortOrderOptions.Asc.ToString())
+                    {
+                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.CurrencyName)&sortOrder=@SortOrderOptions.Desc">
+                            Currency Code
+                            <i class="fa-solid fa-sort-up"></i>
+                        </a>
+                    }
+                    else if (ViewBag.SortBy == nameof(FinancialAccountResponse.CurrencyName) && ViewBag.SortOrder == SortOrderOptions.Desc.ToString())
+                    {
+                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.CurrencyName)&sortOrder=@SortOrderOptions.Asc">
+                            Currency Code
+                            <i class="fa-solid fa-sort-down"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.CurrencyName)&sortOrder=@SortOrderOptions.Desc">
+                            Currency Code
+                        </a>
+                    }
+                </th>
                 <th>User ID</th>
-                <th>CurrencyID</th>
+                <th>Currency ID</th>
             </tr>
         </thead>
         <tbody>
