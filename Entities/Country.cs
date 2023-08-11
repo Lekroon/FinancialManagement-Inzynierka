@@ -6,6 +6,6 @@
 public class Country
 {
     public Guid CountryId { get; set; }
-    public Guid? CountryCurrency { get; set; }
+    public Guid? CurrencyId { get; set; }
     public string? CountryName { get; set; }
 }

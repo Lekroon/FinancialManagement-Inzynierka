@@ -10,7 +10,7 @@ public class CurrenciesServiceTest
 
     public CurrenciesServiceTest(ITestOutputHelper outputHelper)
     {
-        _currenciesService = new CurrenciesService();
+        _currenciesService = new CurrenciesService(false);
         _outputHelper = outputHelper;
     }
     

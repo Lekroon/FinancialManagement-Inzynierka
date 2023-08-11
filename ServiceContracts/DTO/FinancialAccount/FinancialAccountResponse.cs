@@ -4,7 +4,6 @@ public class FinancialAccountResponse
 {
     public Guid? AccountId { get; set; }
     public Guid? UserId { get; set; }
-    public string? UserLogin { get; set; }
     public Guid? CurrencyId { get; set; }
     public string? CurrencyName { get; set; }
     public string? AccountName { get; set; }
@@ -40,7 +39,7 @@ public class FinancialAccountResponse
     {
         return
             $"AccountId:{AccountId}, UserId:{UserId}, CurrencyId:{CurrencyId}, " +
-            $"AccountName:{AccountName}, Balance:{Balance}, CurrencyName:{CurrencyName}, UserLogin:{UserLogin}";
+            $"AccountName:{AccountName}, Balance:{Balance}, CurrencyName:{CurrencyName}";
     }
 
     public FinancialAccountUpdateRequest ToFinancialAccountUpdateRequest()

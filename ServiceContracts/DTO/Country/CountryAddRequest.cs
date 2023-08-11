@@ -19,7 +19,7 @@ public class CountryAddRequest
         return new Entities.Country
         {
             CountryName = CountryName,
-            CountryCurrency = CountryCurrency
+            CurrencyId = CountryCurrency
         };
     }
 }

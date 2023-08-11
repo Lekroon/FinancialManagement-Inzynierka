@@ -12,8 +12,8 @@ public class CountriesServiceTest
 
     public CountriesServiceTest(ITestOutputHelper outputHelper)
     {
-        _countriesService = new CountriesService();
-        _currenciesService = new CurrenciesService();
+        _countriesService = new CountriesService(false);
+        _currenciesService = new CurrenciesService(false);
         _outputHelper = outputHelper;
     }
     

@@ -17,8 +17,8 @@ public class FinancialAccountsTests
 
     public FinancialAccountsTests(ITestOutputHelper testOutputHelper)
     {
-        _currenciesService = new CurrenciesService();
-        _countriesService = new CountriesService();
+        _currenciesService = new CurrenciesService(false);
+        _countriesService = new CountriesService(false);
         _usersService = new UsersService();
         _financialAccountsService = new FinancialAccountsService();
         

@@ -11,23 +11,20 @@ namespace Services;
 public class FinancialAccountsService : IFinancialAccountsService
 {
     private readonly List<FinancialAccount> _listOfAccounts;
-    private readonly CurrenciesService _currenciesService;
-    private readonly UsersService _usersService;
+    private readonly ICurrenciesService _currenciesService;
 
     public FinancialAccountsService()
     {
         _listOfAccounts = new List<FinancialAccount>();
         _currenciesService = new CurrenciesService();
-        _usersService = new UsersService();
     }
 
     private FinancialAccountResponse ConvertFinancialAccountToFinancialAccountResponse(FinancialAccount financialAccount)
     {
-        FinancialAccountResponse financialAccountResponse = financialAccount.ToFinancialAccountResponse();
+        var financialAccountResponse = financialAccount.ToFinancialAccountResponse();
         
         financialAccountResponse.CurrencyName = _currenciesService.GetCurrencyByCurrencyId(financialAccount.CurrencyId)?.CurrencyName;
-        financialAccountResponse.UserLogin = _usersService.GetUserByUserId(financialAccount.UserId)?.Login;
-        
+
         return financialAccountResponse;
     }
 
@@ -140,12 +137,7 @@ public class FinancialAccountsService : IFinancialAccountsService
                 allAccounts.OrderBy(account => account.CurrencyName, StringComparer.OrdinalIgnoreCase).ToList(),
             (nameof(FinancialAccountResponse.CurrencyName), SortOrderOptions.Desc) =>
                 allAccounts.OrderByDescending(account => account.CurrencyName, StringComparer.OrdinalIgnoreCase).ToList(),
-            
-            (nameof(FinancialAccountResponse.UserLogin), SortOrderOptions.Asc) =>
-                allAccounts.OrderBy(account => account.UserLogin, StringComparer.OrdinalIgnoreCase).ToList(),
-            (nameof(FinancialAccountResponse.UserLogin), SortOrderOptions.Desc) =>
-                allAccounts.OrderByDescending(account => account.UserLogin, StringComparer.OrdinalIgnoreCase).ToList(),
-            
+
             _ => allAccounts
         };
 

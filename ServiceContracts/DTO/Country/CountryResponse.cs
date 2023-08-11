@@ -3,7 +3,8 @@
 public class CountryResponse
 {
     public Guid CountryId { get; set; }
-    public Guid? CountryCurrency { get; set; }
+    public Guid? CurrencyId { get; set; }
+    public string? CurrencyName { get; set; }
     public string? CountryName { get; set; }
 
     public override bool Equals(object? obj)
@@ -21,22 +22,19 @@ public class CountryResponse
         var countryToCopmare = (CountryResponse)obj;
 
         return CountryId == countryToCopmare.CountryId &&
-               CountryCurrency == countryToCopmare.CountryCurrency &&
+               CurrencyId == countryToCopmare.CurrencyId &&
                CountryName == countryToCopmare.CountryName;
     }
 
     public override int GetHashCode()
     {
-        var hashCode = new HashCode();
-        hashCode.Add(CountryId);
-        hashCode.Add(CountryCurrency);
-        hashCode.Add(CountryName);
-        return hashCode.ToHashCode();
+        return base.GetHashCode();
     }
 
     public override string ToString()
     {
-        return $"CountryId: {CountryId}, CountryCurrency: {CountryCurrency}, CountryName: {CountryName}";
+        return $"CountryId: {CountryId}, CountryCurrency: {CurrencyId}, CountryName: {CountryName}," +
+               $" CurrencyName: {CurrencyName}";
     }
 }
 
@@ -47,7 +45,7 @@ public static class CountryExtension
         return new CountryResponse
         {
             CountryId = country.CountryId,
-            CountryCurrency = country.CountryCurrency,
+            CurrencyId = country.CurrencyId,
             CountryName = country.CountryName
         };
     }
