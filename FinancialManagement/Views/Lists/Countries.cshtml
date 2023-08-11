@@ -1,0 +1,29 @@
+﻿@model IEnumerable<CountryResponse>
+
+@{
+    ViewBag.Title = "Countries list";
+}
+
+<h1>Countries list</h1>
+
+<table class="table w-100 mt">
+    <thead>
+        <tr>
+            <th>Country ID</th>
+            <th>Country Name</th>
+            <th>Currency Code</th>
+            <th>Currency ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var country in Model)
+        {
+            <tr>
+                <td>@country.CountryId</td>
+                <td>@country.CountryName</td>
+                <td>@country.CurrencyName</td>
+                <td>@country.CurrencyId</td>
+            </tr>
+        }
+    </tbody>
+</table>

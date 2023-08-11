@@ -9,6 +9,7 @@ public class UserAddRequest
 {
     [Required]
     [MinLength(6)]
+    [RegularExpression("^.\\S*$", ErrorMessage = "Login cannot contain whitespaces!")]
     public string? Login { get; set; }
     
     [Required]

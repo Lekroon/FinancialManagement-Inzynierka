@@ -14,7 +14,7 @@ public class UsersServiceTest
 
     public UsersServiceTest(ITestOutputHelper outputHelper)
     {
-        _usersService = new UsersService();
+        _usersService = new UsersService(false);
         _currenciesService = new CurrenciesService(false);
         _countriesService = new CountriesService(false);
         _outputHelper = outputHelper;

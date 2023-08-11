@@ -16,24 +16,28 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Bartosz\OneDrive\Desktop\C# nauka\FinancialManagement\FinancialManagement
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Bartosz/OneDrive/Desktop/C\# nauka/FinancialManagement/FinancialManagement/Views/Lists/Accounts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdHNcQWNjb3VudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Bartosz/OneDrive/Desktop/C\# nauka/FinancialManagement/FinancialManagement/Views/Lists/Countries.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdHNcQ291bnRyaWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Bartosz/OneDrive/Desktop/C\# nauka/FinancialManagement/FinancialManagement/Views/Lists/Currencies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdHNcQ3VycmVuY2llcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Bartosz/OneDrive/Desktop/C\# nauka/FinancialManagement/FinancialManagement/Views/Lists/Users.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdHNcVXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Bartosz/OneDrive/Desktop/C\# nauka/FinancialManagement/FinancialManagement/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bartosz/OneDrive/Desktop/C\# nauka/FinancialManagement/FinancialManagement/Views/User/Countries.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDb3VudHJpZXMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Bartosz/OneDrive/Desktop/C\# nauka/FinancialManagement/FinancialManagement/Views/User/Currencies.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDdXJyZW5jaWVzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Bartosz/OneDrive/Desktop/C\# nauka/FinancialManagement/FinancialManagement/Views/User/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Bartosz/OneDrive/Desktop/C\# nauka/FinancialManagement/FinancialManagement/Views/User/Users.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2Vycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Bartosz/OneDrive/Desktop/C\# nauka/FinancialManagement/FinancialManagement/Views/_ViewImports.cshtml]

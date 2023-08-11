@@ -11,6 +11,7 @@ public class UserResponse
     public string? Email { get; set; }
     public string? PhoneNumber { get; set; }
     public Guid? CountryId { get; set; }
+    public string? CountryName { get; set; }
     public bool? IsActive { get; set; }
 
     public override bool Equals(object? obj)
@@ -55,7 +56,7 @@ public class UserResponse
     {
         return
             $"UserId:{UserId}, Login:{Login}, Password:{Password}, Email:{Email}, Phone(optional):{PhoneNumber}, " +
-            $"CountryId: {CountryId}, IsActive:{IsActive}";
+            $"CountryId: {CountryId}, IsActive:{IsActive}, CountryName:{CountryName}";
     }
 }
 

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FinancialAccountResponse>
+
+@{
+    ViewBag.Title = "Financial account list";
+}
+
+<form action="accounts" method="get">
+    <h1>Financial accounts list</h1>
+
+    <div class="box flex">
+        <div class="flex-1">
+            <input type="text" id="Search" class="form-input" placeholder="Search" name="searchString"/>
+        </div>
+    
+        <div class="flex-1">
+            <button class="button button-blue-back">Search</button>
+        </div>
+    </div>
+
+    <table class="table w-100 mt">
+        <thead>
+            <tr>
+                <th>Account ID</th>
+                <th>Account Name</th>
+                <th>Balance</th>
+                <th>User ID</th>
+                <th>CurrencyID</th>
+                <th>Currency Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var financialAccount in Model)
+            {
+                <tr>
+                    <td>@financialAccount.AccountId</td>
+                    <td>@financialAccount.AccountName</td>
+                    <td>@financialAccount.Balance</td>
+                    <td>@financialAccount.UserId</td>
+                    <td>@financialAccount.CurrencyId</td>
+                    <td>@financialAccount.CurrencyName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

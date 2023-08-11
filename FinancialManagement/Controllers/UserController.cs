@@ -11,22 +11,4 @@ public class UserController : Controller
     {
         return View();
     }
-
-    [Route("temp/users")]
-    public IActionResult Users()
-    {
-        return View();
-    }
-    
-    [Route("temp/currencies")]
-    public IActionResult Currencies()
-    {
-        return View();
-    }
-    
-    [Route("temp/countries")]
-    public IActionResult Countries()
-    {
-        return View();
-    }
 }

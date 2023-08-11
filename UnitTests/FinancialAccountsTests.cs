@@ -19,7 +19,7 @@ public class FinancialAccountsTests
     {
         _currenciesService = new CurrenciesService(false);
         _countriesService = new CountriesService(false);
-        _usersService = new UsersService();
+        _usersService = new UsersService(false);
         _financialAccountsService = new FinancialAccountsService();
         
         _testOutputHelper = testOutputHelper;

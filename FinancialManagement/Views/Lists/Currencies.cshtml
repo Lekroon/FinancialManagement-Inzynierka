@@ -1,0 +1,25 @@
+﻿@model IEnumerable<CurrencyResponse>
+
+@{
+    ViewBag.Title = "Currencies list";
+}
+
+<h1>Currencies list</h1>
+
+<table class="table w-100 mt">
+    <thead>
+        <tr>
+            <th>Currency ID</th>
+            <th>Currency Code</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var currency in Model)
+        {
+            <tr>
+                <td>@currency.CurrencyId</td>
+                <td>@currency.CurrencyName</td>
+            </tr>
+        }
+    </tbody>
+</table>
