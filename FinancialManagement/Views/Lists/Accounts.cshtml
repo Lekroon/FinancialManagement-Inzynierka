@@ -9,11 +9,13 @@
 
     <div class="box flex">
         <div class="flex-1">
-            <input type="text" id="Search" class="form-input" placeholder="Search" name="searchString"/>
+            <input type="text" id="Search" class="form-input" placeholder="Search" name="searchString" value="@ViewBag.SearchString"/>
         </div>
-    
+
         <div class="flex-1">
             <button class="button button-blue-back">Search</button>
+            <a style="text-decoration: none; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; cursor: default;" 
+               href="accounts" class="button button-red-back">Clear</a>
         </div>
     </div>
 
@@ -23,9 +25,9 @@
                 <th>Account ID</th>
                 <th>Account Name</th>
                 <th>Balance</th>
+                <th>Currency Code</th>
                 <th>User ID</th>
                 <th>CurrencyID</th>
-                <th>Currency Code</th>
             </tr>
         </thead>
         <tbody>
@@ -35,9 +37,9 @@
                     <td>@financialAccount.AccountId</td>
                     <td>@financialAccount.AccountName</td>
                     <td>@financialAccount.Balance</td>
+                    <td>@financialAccount.CurrencyName</td>
                     <td>@financialAccount.UserId</td>
                     <td>@financialAccount.CurrencyId</td>
-                    <td>@financialAccount.CurrencyName</td>
                 </tr>
             }
         </tbody>

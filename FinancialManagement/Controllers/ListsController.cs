@@ -49,10 +49,12 @@ public class ListsController : Controller
     }
     
     [Route("accounts")]
-    public IActionResult Accounts()
+    public IActionResult Accounts(string? searchString)
     {
-        var allFinancialAccounts = _financialAccountsService.GetAllFinancialAccounts();
+        var allFinancialAccounts = _financialAccountsService.GetFilteredFinancialAccounts(searchString);
 
+        ViewBag.SearchString = searchString ?? string.Empty;
+        
         return View(allFinancialAccounts);
     }
 }
