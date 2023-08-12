@@ -1,5 +1,4 @@
-﻿@using Entities
-@model IEnumerable<FinancialAccountResponse>
+﻿@model IEnumerable<FinancialAccountResponse>
 
 @{
     ViewBag.Title = "Financial account list";
@@ -27,72 +26,27 @@
             <tr>
                 <th>Account ID</th>
                 <th>
-                    @if (ViewBag.SortBy == nameof(FinancialAccountResponse.AccountName) && ViewBag.SortOrder == SortOrderOptions.Asc.ToString())
-                    {
-                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.AccountName)&sortOrder=@SortOrderOptions.Desc">
-                            Account Name
-                            <i class="fa-solid fa-sort-up"></i>
-                        </a>
-                    }
-                    else if (ViewBag.SortBy == nameof(FinancialAccountResponse.AccountName) && ViewBag.SortOrder == SortOrderOptions.Desc.ToString())
-                    {
-                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.AccountName)&sortOrder=@SortOrderOptions.Asc">
-                            Account Name
-                            <i class="fa-solid fa-sort-down"></i>
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.AccountName)&sortOrder=@SortOrderOptions.Desc">
-                            Account Name
-                        </a>
-                    }
+                    @await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData)
+                           {
+                               { "ColumnName", nameof(FinancialAccountResponse.AccountName) },
+                               { "DisplayName", "Account Name" }
+                           })
                 </th>
 
                 <th>
-                    @if (ViewBag.SortBy == nameof(FinancialAccountResponse.Balance) && ViewBag.SortOrder == SortOrderOptions.Asc.ToString())
-                    {
-                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.Balance)&sortOrder=@SortOrderOptions.Desc">
-                            Balance
-                            <i class="fa-solid fa-sort-up"></i>
-                        </a>
-                    }
-                    else if (ViewBag.SortBy == nameof(FinancialAccountResponse.Balance) && ViewBag.SortOrder == SortOrderOptions.Desc.ToString())
-                    {
-                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.Balance)&sortOrder=@SortOrderOptions.Asc">
-                            Balance
-                            <i class="fa-solid fa-sort-down"></i>
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.Balance)&sortOrder=@SortOrderOptions.Desc">
-                            Balance
-                        </a>
-                    }
+                    @await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData)
+                           {
+                               { "ColumnName", nameof(FinancialAccountResponse.Balance) },
+                               { "DisplayName", "Balance" }
+                           })
                 </th>
 
                 <th>
-                    @if (ViewBag.SortBy == nameof(FinancialAccountResponse.CurrencyName) && ViewBag.SortOrder == SortOrderOptions.Asc.ToString())
-                    {
-                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.CurrencyName)&sortOrder=@SortOrderOptions.Desc">
-                            Currency Code
-                            <i class="fa-solid fa-sort-up"></i>
-                        </a>
-                    }
-                    else if (ViewBag.SortBy == nameof(FinancialAccountResponse.CurrencyName) && ViewBag.SortOrder == SortOrderOptions.Desc.ToString())
-                    {
-                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.CurrencyName)&sortOrder=@SortOrderOptions.Asc">
-                            Currency Code
-                            <i class="fa-solid fa-sort-down"></i>
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="accounts?searchString=@ViewBag.SearchString&sortBy=@nameof(FinancialAccountResponse.CurrencyName)&sortOrder=@SortOrderOptions.Desc">
-                            Currency Code
-                        </a>
-                    }
+                    @await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData)
+                           {
+                               { "ColumnName", nameof(FinancialAccountResponse.CurrencyName) },
+                               { "DisplayName", "Currency Code" }
+                           })
                 </th>
                 <th>User ID</th>
                 <th>Currency ID</th>
