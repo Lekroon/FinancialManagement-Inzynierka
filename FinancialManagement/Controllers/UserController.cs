@@ -6,8 +6,13 @@ namespace FinancialManagement.Controllers;
 public class UserController : Controller
 {
     [Route("login")]
-    [Route("/")]
     public IActionResult Login()
+    {
+        return View();
+    }
+
+    [Route("register")]
+    public IActionResult Register()
     {
         return View();
     }

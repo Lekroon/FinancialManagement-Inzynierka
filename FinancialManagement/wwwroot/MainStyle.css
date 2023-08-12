@@ -97,6 +97,14 @@
     background-color: #83b8cb;
 }
 
+.w-15 {
+    width: 15%;
+}
+
+.w-20 {
+    width: 20%;
+}
+
 .w-25 {
     width: 25%;
 }
@@ -367,4 +375,33 @@ a.link-hover:hover {
         display: inline-block;
         width: auto;
     }
+}
+
+.div-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.form-text-input {
+    padding: 8px 10px;
+    font-size: 105%;
+    border-radius: 8px;
+    border: 1px solid #d0d0d0;
+    transition: box-shadow 0.2s;
+}
+
+input:focus::placeholder {
+    color: transparent;
 }

@@ -2,4 +2,25 @@
     ViewBag.Title = "Login";
 }
 
-<h1>Login page</h1>
+<h1 class="text-center mb-15">Login page</h1>
+
+<form action="#" method="post">
+    <div class="w-50 text-center div-center">
+        <input class="w-50 form-text-input mb-5" type="text" id="Login" placeholder="Enter login or email" name="loginOrEmail"/>
+    </div>
+
+    <div class="w-50 text-center div-center">
+        <input class="w-50 form-text-input mb-15" type="password" id="Password" placeholder="Enter password" name="password"/>
+    </div>
+
+    <div class="w-50 text-center div-center">
+        <button class="button button-blue-back w-25 mb-15" type="submit" id="LoginButton">Login</button>
+    </div>
+</form>
+
+<div class="w-50 text-center div-center">
+    <a style="text-decoration: none; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; cursor: default;"
+       href="register" class="button button-green-back">
+        Register
+    </a>
+</div>
