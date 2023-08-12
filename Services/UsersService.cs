@@ -151,12 +151,17 @@ public class UsersService : IUsersService
 
     public UserResponse? GetUserByUserId(Guid? userId)
     {
-        return _listOfUsers.FirstOrDefault(user => user.UserId == userId)?.ToUserResponse();
+        var foundUser = _listOfUsers.FirstOrDefault(user => user.UserId == userId);
+
+        return foundUser == null ? null : ConvertUserToUserResponse(foundUser);
     }
 
     public UserResponse? GetUserByUserLoginOrEmail(string? loginOrEmail)
     {
-        return _listOfUsers.FirstOrDefault(user => user.Login == loginOrEmail || 
-                                                   user.Email == loginOrEmail)?.ToUserResponse();
+        var foundUser = _listOfUsers.FirstOrDefault(user => user.Login == loginOrEmail || 
+                                                          user.Email == loginOrEmail);
+        
+        return foundUser == null ? null : ConvertUserToUserResponse(foundUser);
+
     }
 }

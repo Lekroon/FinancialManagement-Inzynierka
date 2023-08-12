@@ -98,6 +98,8 @@ public class CountriesService : ICountriesService
 
     public CountryResponse? GetCountryByCountryId(Guid? countryId)
     {
-        return _listOfCountries.FirstOrDefault(country => country.CountryId == countryId)?.ToCountryResponse();
+        var foundCountry = _listOfCountries.FirstOrDefault(country => country.CountryId == countryId);
+        
+        return foundCountry == null ? null : ConvertCountryToCountryResponse(foundCountry);
     }
 }

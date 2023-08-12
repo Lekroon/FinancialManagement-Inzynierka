@@ -162,15 +162,17 @@ public class FinancialAccountsService : IFinancialAccountsService
 
     public FinancialAccountResponse? GetFinancialAccountById(Guid? financialAccountId)
     {
-        return _listOfAccounts.FirstOrDefault(financialAccount => financialAccount.AccountId == financialAccountId)?
-            .ToFinancialAccountResponse();
+        var foundAccount = _listOfAccounts.FirstOrDefault(financialAccount => financialAccount.AccountId == financialAccountId);
+
+        return foundAccount == null ? null : ConvertFinancialAccountToFinancialAccountResponse(foundAccount);
     }
 
     public FinancialAccountResponse? GetFinancialAccountByName(string? financialAccountName, Guid? userId)
     {
-        return _listOfAccounts.FirstOrDefault(financialAccount => financialAccount.UserId == userId &&
-                                                                  financialAccount.AccountName == financialAccountName)?
-            .ToFinancialAccountResponse();
+        var foundAccount = _listOfAccounts.FirstOrDefault(financialAccount => financialAccount.UserId == userId &&
+                                                                  financialAccount.AccountName == financialAccountName);
+        
+        return foundAccount == null ? null : ConvertFinancialAccountToFinancialAccountResponse(foundAccount);
     }
 
     public List<FinancialAccountResponse> GetFilteredFinancialAccounts(string? searchString)
