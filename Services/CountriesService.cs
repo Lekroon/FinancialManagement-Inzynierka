@@ -93,7 +93,7 @@ public class CountriesService : ICountriesService
 
     public List<CountryResponse> GetAllCountries()
     {
-        return _listOfCountries.Select(country => country.ToCountryResponse()).ToList();
+        return _listOfCountries.Select(ConvertCountryToCountryResponse).ToList();
     }
 
     public CountryResponse? GetCountryByCountryId(Guid? countryId)

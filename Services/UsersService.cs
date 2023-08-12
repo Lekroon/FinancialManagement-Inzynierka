@@ -146,7 +146,7 @@ public class UsersService : IUsersService
 
     public List<UserResponse> GetAllUsers()
     {
-        return _listOfUsers.Select(user => user.ToUserResponse()).ToList();
+        return _listOfUsers.Select(ConvertUserToUserResponse).ToList();
     }
 
     public UserResponse? GetUserByUserId(Guid? userId)

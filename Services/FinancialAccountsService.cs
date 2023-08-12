@@ -157,7 +157,7 @@ public class FinancialAccountsService : IFinancialAccountsService
 
     public List<FinancialAccountResponse> GetAllFinancialAccounts()
     {
-        return _listOfAccounts.Select(financialAccount => financialAccount.ToFinancialAccountResponse()).ToList();
+        return _listOfAccounts.Select(ConvertFinancialAccountToFinancialAccountResponse).ToList();
     }
 
     public FinancialAccountResponse? GetFinancialAccountById(Guid? financialAccountId)
