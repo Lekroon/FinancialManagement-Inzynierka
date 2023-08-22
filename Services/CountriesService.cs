@@ -93,7 +93,9 @@ public class CountriesService : ICountriesService
 
     public List<CountryResponse> GetAllCountries()
     {
-        return _listOfCountries.Select(ConvertCountryToCountryResponse).ToList();
+        var allCountries = _listOfCountries.Select(ConvertCountryToCountryResponse).ToList();
+
+        return allCountries.OrderBy(country => country.CountryName, StringComparer.CurrentCultureIgnoreCase).ToList();
     }
 
     public CountryResponse? GetCountryByCountryId(Guid? countryId)
