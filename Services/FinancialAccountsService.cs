@@ -209,9 +209,9 @@ public class FinancialAccountsService : IFinancialAccountsService
         var sortedFinancialAccounts = (sortBy, sortOrder) switch
         {
             (nameof(FinancialAccountResponse.AccountName), SortOrderOptions.Asc) =>
-                allAccounts.OrderBy(account => account.AccountName, StringComparer.OrdinalIgnoreCase).ToList(),
+                allAccounts.OrderBy(account => account.AccountName, StringComparer.CurrentCultureIgnoreCase).ToList(),
             (nameof(FinancialAccountResponse.AccountName), SortOrderOptions.Desc) =>
-                allAccounts.OrderByDescending(account => account.AccountName, StringComparer.OrdinalIgnoreCase)
+                allAccounts.OrderByDescending(account => account.AccountName, StringComparer.CurrentCultureIgnoreCase)
                     .ToList(),
         
             (nameof(FinancialAccountResponse.Balance), SortOrderOptions.Asc) =>
@@ -220,9 +220,9 @@ public class FinancialAccountsService : IFinancialAccountsService
                 allAccounts.OrderByDescending(account => account.Balance).ToList(),
 
             (nameof(FinancialAccountResponse.CurrencyName), SortOrderOptions.Asc) =>
-                allAccounts.OrderBy(account => account.CurrencyName, StringComparer.OrdinalIgnoreCase).ToList(),
+                allAccounts.OrderBy(account => account.CurrencyName, StringComparer.CurrentCultureIgnoreCase).ToList(),
             (nameof(FinancialAccountResponse.CurrencyName), SortOrderOptions.Desc) =>
-                allAccounts.OrderByDescending(account => account.CurrencyName, StringComparer.OrdinalIgnoreCase).ToList(),
+                allAccounts.OrderByDescending(account => account.CurrencyName, StringComparer.CurrentCultureIgnoreCase).ToList(),
 
             _ => allAccounts
         };
