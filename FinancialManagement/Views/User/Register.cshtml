@@ -35,7 +35,7 @@
         <select class="w-50 form-text-input mb-15" required>
             @foreach (var country in Model)
             {
-                <option>@country.CountryName</option>
+                <option name="countryName" value="@country.CountryName">@country.CountryName</option>
             }
         </select>
     </div>
