@@ -56,9 +56,9 @@
 {
     <div class="text-red mt">
         <ul>
-            @foreach (ModelError error in ViewBag.Errors)
+            @foreach (var error in ViewBag.Errors)
             {
-                <li>@error.ErrorMessage</li>
+                <li>@error</li>
             }
         </ul>
     </div>

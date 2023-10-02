@@ -42,7 +42,9 @@ public class UserController : Controller
         {
             var allCountries = _countriesService.GetAllCountries();
             
-            var errors = ModelState.Values.SelectMany(value => value.Errors);
+            var errors = ModelState.Values.SelectMany(value => value.Errors)
+                .Select(error => error.ErrorMessage)
+                .ToList();
 
             ViewBag.Countries = allCountries;
             ViewBag.Errors = errors;
