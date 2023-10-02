@@ -57,7 +57,6 @@ public class UsersServiceTest
             Email = null,
             PhoneNumber = null,
             CountryId = null,
-            IsActive = null,
         };
         
         // Assert
@@ -93,7 +92,6 @@ public class UsersServiceTest
             Email = "Email@gmail.com",
             PhoneNumber = "123456789",
             CountryId = germany.CountryId,
-            IsActive = false
         };
         
         var userAddRequest2 = new UserAddRequest
@@ -103,7 +101,6 @@ public class UsersServiceTest
             Email = "Email@gmail.com",
             PhoneNumber = "123456789",
             CountryId = germany.CountryId,       
-            IsActive = false
         };
         
         // Assert
@@ -139,8 +136,7 @@ public class UsersServiceTest
             Password = "MyPassword",
             Email = "SomeEmail@gmail.com",
             PhoneNumber = null,
-            CountryId = poland.CountryId,
-            IsActive = true
+            CountryId = poland.CountryId
         };
         
         // Act

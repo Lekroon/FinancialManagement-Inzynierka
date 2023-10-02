@@ -8,12 +8,12 @@ namespace ServiceContracts.DTO.User;
 public class UserAddRequest
 {
     [Required]
-    [MinLength(6)]
+    [MinLength(6, ErrorMessage = "Login must be at least 6 characters long")]
     [RegularExpression("^.\\S*$", ErrorMessage = "Login cannot contain whitespaces!")]
     public string? Login { get; set; }
     
     [Required]
-    [MinLength(8)]
+    [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
     public string? Password { get; set; }
     
     [Required]
@@ -25,9 +25,9 @@ public class UserAddRequest
     
     [Required]
     public Guid? CountryId { get; set; }
-    
-    [Required]
-    public bool? IsActive { get; set; }
+
+    [Required] 
+    public bool? IsActive { get; set; } = false;
 
     public Entities.User ToUser()
     {

@@ -4,6 +4,7 @@ using Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
 // add services into IoC container 
 builder.Services.AddSingleton<ICurrenciesService, CurrenciesService>();
 builder.Services.AddSingleton<ICountriesService, CountriesService>();

@@ -1,5 +1,4 @@
-﻿@model IEnumerable<CountryResponse>
-
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
 @{
     ViewBag.Title = "Register";
 }
@@ -8,39 +7,39 @@
 
 <form action="#" method="post">
     <div class="w-50 text-center div-center">
-        <input class="w-50 form-text-input mb-15" type="text" id="Login" placeholder="Enter login or email" name="loginOrEmail" 
+        <input class="w-50 form-text-input mb-15" type="text" id="Login" placeholder="Enter login or email" name="Login"
                required/>
     </div>
 
     <div class="w-50 text-center div-center">
-        <input class="w-50 form-text-input mb-15" type="password" id="Password" placeholder="Enter password" name="password"
+        <input class="w-50 form-text-input mb-15" type="password" id="Password" placeholder="Enter password" name="Password"
                required/>
     </div>
 
     <div class="w-50 text-center div-center">
-        <input class="w-50 form-text-input mb-15" type="password" id="ConfirmPassword" placeholder="Confirm password" 
-               name="confirmPassword" required/>
+        <input class="w-50 form-text-input mb-15" type="password" id="ConfirmPassword" placeholder="Confirm password"
+               name="ConfirmPassword" required/>
     </div>
-    
+
     <div class="w-50 text-center div-center">
-        <input class="w-50 form-text-input mb-15" type="email" id="Email" placeholder="Enter email" name="email" required/>
+        <input class="w-50 form-text-input mb-15" type="email" id="Email" placeholder="Enter email" name="Email" required/>
     </div>
-    
+
     <div class="w-50 text-center div-center">
-        <input class="w-50 form-text-input mb-15" type="text" id="PhoneNumber" placeholder="Enter phone number (optional)" 
-               name="phoneNumber"/>
+        <input class="w-50 form-text-input mb-15" type="text" id="PhoneNumber" placeholder="Enter phone number (optional)"
+               name="PhoneNumber"/>
     </div>
-    
+
     <div class="w-50 text-center div-center">
-        <select class="w-50 form-text-input mb-15" required>
-            @foreach (var country in Model)
+        <select id="CountryID" name="CountryID" class="w-50 form-text-input mb-15" required>
+            @foreach (var country in ViewBag.Countries)
             {
-                <option name="countryName" value="@country.CountryName">@country.CountryName</option>
+                <option value="@country.CountryId">@country.CountryName</option>
             }
         </select>
     </div>
-    
-    
+
+
     <div class="w-50 text-center div-center">
         <button class="button button-blue-back w-25 mb-15" type="submit" id="LoginButton">Register</button>
     </div>
@@ -52,3 +51,15 @@
         Login
     </a>
 </div>
+
+@if (ViewBag.Errors != null)
+{
+    <div class="text-red mt">
+        <ul>
+            @foreach (ModelError error in ViewBag.Errors)
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceContracts;
+using ServiceContracts.DTO.User;
 using Services;
 
 namespace FinancialManagement.Controllers;
@@ -8,10 +9,12 @@ namespace FinancialManagement.Controllers;
 public class UserController : Controller
 {
     private readonly ICountriesService _countriesService;
+    private readonly IUsersService _usersService;
 
-    public UserController(ICountriesService countriesService)
+    public UserController(ICountriesService countriesService, IUsersService usersService)
     {
         _countriesService = countriesService;
+        _usersService = usersService;
     }
     
     [Route("login")]
@@ -21,10 +24,34 @@ public class UserController : Controller
     }
 
     [Route("register")]
+    [HttpGet]
     public IActionResult Register()
     {
         var allCountries = _countriesService.GetAllCountries();
+
+        ViewBag.Countries = allCountries;
         
-        return View(allCountries);
+        return View();
+    }
+    
+    [Route("register")]
+    [HttpPost]
+    public IActionResult Register(UserAddRequest userAddRequest)
+    {
+        if (!ModelState.IsValid)
+        {
+            var allCountries = _countriesService.GetAllCountries();
+            
+            var errors = ModelState.Values.SelectMany(value => value.Errors);
+
+            ViewBag.Countries = allCountries;
+            ViewBag.Errors = errors;
+
+            return View();
+        }
+
+        var addedUser = _usersService.AddUser(userAddRequest);
+        
+        return RedirectToAction("Users", "Lists");
     }
 }
