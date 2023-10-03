@@ -5,7 +5,7 @@ using Services;
 
 namespace FinancialManagement.Controllers;
 
-[Route("user")]
+[Route("[controller]/[action]")]
 public class UserController : Controller
 {
     private readonly ICountriesService _countriesService;
@@ -17,13 +17,14 @@ public class UserController : Controller
         _usersService = usersService;
     }
     
-    [Route("login")]
+    // Url: login
+    [Route("")]
     public IActionResult Login()
     {
         return View();
     }
 
-    [Route("register")]
+    [Route("")]
     [HttpGet]
     public IActionResult Register()
     {
@@ -34,7 +35,7 @@ public class UserController : Controller
         return View();
     }
     
-    [Route("register")]
+    [Route("")]
     [HttpPost]
     public IActionResult Register(UserAddRequest userAddRequest)
     {
@@ -53,7 +54,7 @@ public class UserController : Controller
         }
 
         var addedUser = _usersService.AddUser(userAddRequest);
-        
+
         return RedirectToAction("Users", "Lists");
     }
 }
