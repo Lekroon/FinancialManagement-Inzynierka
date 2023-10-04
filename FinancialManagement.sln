@@ -1,14 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialManagement", "FinancialManagement\FinancialManagement.csproj", "{CA82A21A-E7B3-4F56-A601-812FCF015F76}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialManagement", "FinancialManagement\FinancialManagement.csproj", "{CA82A21A-E7B3-4F56-A601-812FCF015F76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{F7FB2338-758B-407D-814D-634278809BAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{F7FB2338-758B-407D-814D-634278809BAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{D0C69CB4-A6E0-46C8-89A3-B4EF28AC0085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{D0C69CB4-A6E0-46C8-89A3-B4EF28AC0085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContracts", "ServiceContracts\ServiceContracts.csproj", "{7F85DF5E-0102-41DA-890E-B26478C6C842}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceContracts", "ServiceContracts\ServiceContracts.csproj", "{7F85DF5E-0102-41DA-890E-B26478C6C842}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{DDBA1C6B-AA10-4C39-BADE-E41C28EB03E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{DDBA1C6B-AA10-4C39-BADE-E41C28EB03E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +39,11 @@ Global
 		{DDBA1C6B-AA10-4C39-BADE-E41C28EB03E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDBA1C6B-AA10-4C39-BADE-E41C28EB03E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDBA1C6B-AA10-4C39-BADE-E41C28EB03E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {456048CE-90F3-44F0-AA76-4E42622B03A8}
 	EndGlobalSection
 EndGlobal

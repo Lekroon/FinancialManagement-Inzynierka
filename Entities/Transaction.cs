@@ -7,4 +7,5 @@ public class Transaction
     public Guid? CategoryId { get; set; }
     public decimal? Amount { get; set; }
     public DateTime? TransactionDate { get; set; }
+    public string? TransactionType { get; set; }
 }
