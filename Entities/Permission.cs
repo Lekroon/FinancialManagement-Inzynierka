@@ -1,6 +1,6 @@
 ﻿namespace Entities;
 
-public class Permissions
+public class Permission
 {
     public Guid PermissionId { get; set; }
     public Guid? UserId { get; set; }
