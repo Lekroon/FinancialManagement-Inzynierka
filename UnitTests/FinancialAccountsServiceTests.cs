@@ -7,7 +7,7 @@ using Xunit.Abstractions;
 
 namespace UnitTests;
 
-public class FinancialAccountsTests
+public class FinancialAccountsServiceTests
 {
     private readonly ICurrenciesService _currenciesService;
     private readonly ICountriesService _countriesService;
@@ -15,7 +15,7 @@ public class FinancialAccountsTests
     private readonly IFinancialAccountsService _financialAccountsService;
     private readonly ITestOutputHelper _testOutputHelper;
 
-    public FinancialAccountsTests(ITestOutputHelper testOutputHelper)
+    public FinancialAccountsServiceTests(ITestOutputHelper testOutputHelper)
     {
         _currenciesService = new CurrenciesService(false);
         _countriesService = new CountriesService(false);

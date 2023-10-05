@@ -10,6 +10,7 @@ builder.Services.AddSingleton<ICurrenciesService, CurrenciesService>();
 builder.Services.AddSingleton<ICountriesService, CountriesService>();
 builder.Services.AddSingleton<IUsersService, UsersService>();
 builder.Services.AddSingleton<IFinancialAccountsService, FinancialAccountsService>();
+builder.Services.AddSingleton<ITransactionsCategoriesService, TransactionCategoriesService>();
 
 var app = builder.Build();
 
