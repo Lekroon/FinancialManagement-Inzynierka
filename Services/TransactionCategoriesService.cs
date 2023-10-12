@@ -1,6 +1,7 @@
 ﻿using Entities;
 using ServiceContracts;
 using ServiceContracts.DTO.TransactionCategory;
+using Services.Helpers;
 
 namespace Services;
 
@@ -52,7 +53,29 @@ public class TransactionCategoriesService : ITransactionsCategoriesService
 
     public TransactionCategoryResponse AddTransactionCategory(TransactionCategoryAddRequest? categoryAddRequest)
     {
-        throw new NotImplementedException();
+        if (categoryAddRequest == null)
+        {
+            throw new ArgumentNullException(nameof(categoryAddRequest));
+        }
+        
+        // Model validation
+        ValidationHelper.ModelValidation(categoryAddRequest);
+        
+        // Converting types
+        var transactionCategory = categoryAddRequest.ToTransactionCategory();
+
+        // Category name cannot be duplicated
+        if (_listOfCategories.Any(categoryInList => categoryInList.CategoryName == transactionCategory.CategoryName))
+        {
+            throw new ArgumentException("Category name already exists");
+        }
+        
+        // Generating new ID
+        transactionCategory.CategoryId = Guid.NewGuid();
+        
+        _listOfCategories.Add(transactionCategory);
+
+        return transactionCategory.ToTransactionCategoryResponse();
     }
 
     public List<TransactionCategoryResponse> GetAllTransactionCategories()

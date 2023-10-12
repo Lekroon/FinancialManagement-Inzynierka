@@ -22,7 +22,7 @@ public class TransactionCategoriesServiceTest
      * Test requirements:
      * 1. When TransactionCategoryAddRequest is null, it should throw ArgumentNullException
      * 2. When required properties are null, it should throw ArgumentException
-     * 3. When logged user want to add category with already existing name, it should throw ArgumentException
+     * 3. When CategoryName is duplicated, it should throw ArgumentException
      * 4. When CategoryName contains any non-letters characters, it should throw ArgumentException
      * 5. When category is added properly, it should be added to list 
      */
@@ -74,7 +74,7 @@ public class TransactionCategoriesServiceTest
         {
             CategoryName = "Restaurant"
         };
-
+        
         // Assert
         Assert.Throws<ArgumentException>(() =>
         {
