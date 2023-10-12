@@ -299,7 +299,7 @@ public class TransactionCategoriesServiceTest
         _testOutputHelper.WriteLine($"\n\nUpdated category:\n{updatedCategoryResponse}");
         
         var categoryFromGet = _transactionsCategories.GetTransactionCategoryById(updatedCategoryResponse.CategoryId);
-        
+
         Assert.Equal(categoryFromGet, updatedCategoryResponse);
     }
     

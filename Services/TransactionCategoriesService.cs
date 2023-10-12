@@ -108,7 +108,7 @@ public class TransactionCategoriesService : ITransactionsCategoriesService
             throw new ArgumentException("Given financial account ID doesn't exist");
         }
         
-        // update financial account
+        // update financial account 
         matchingCategory.CategoryName = categoryUpdateRequest.CategoryName;
 
         return matchingCategory.ToTransactionCategoryResponse();
