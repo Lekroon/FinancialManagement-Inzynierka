@@ -83,14 +83,35 @@ public class TransactionCategoriesService : ITransactionsCategoriesService
         return _listOfCategories.Select(category => category.ToTransactionCategoryResponse()).ToList();
     }
 
-    public List<TransactionCategoryResponse> GetTransactionCategoryById(Guid? categoryId)
+    public TransactionCategoryResponse? GetTransactionCategoryById(Guid? categoryId)
     {
-        throw new NotImplementedException();
+        var foundCategory = _listOfCategories.FirstOrDefault(category => category.CategoryId == categoryId);
+
+        return foundCategory?.ToTransactionCategoryResponse();
     }
 
     public TransactionCategoryResponse UpdateTransactionCategory(TransactionCategoryUpdateRequest? categoryUpdateRequest)
     {
-        throw new NotImplementedException();
+        if (categoryUpdateRequest == null)
+        {
+            throw new ArgumentNullException(nameof(categoryUpdateRequest));
+        }
+        
+        ValidationHelper.ModelValidation(categoryUpdateRequest);
+        
+        // financial account object to update
+        var matchingCategory =
+            _listOfCategories.FirstOrDefault(category => category.CategoryId == categoryUpdateRequest.CategoryId);
+
+        if (matchingCategory == null)
+        {
+            throw new ArgumentException("Given financial account ID doesn't exist");
+        }
+        
+        // update financial account
+        matchingCategory.CategoryName = categoryUpdateRequest.CategoryName;
+
+        return matchingCategory.ToTransactionCategoryResponse();
     }
 
     public bool DeleteTransactionCategory(Guid? categoryId)

@@ -179,4 +179,129 @@ public class TransactionCategoriesServiceTest
     }
     
     #endregion
+
+    #region GetTransactionCategoryById
+
+    /*
+     * Test requirements:
+     * 1. If given id is null, it should return null
+     * 2. If id is given propely, it should return matching category
+     */
+
+    [Fact]
+    public void GetTransactionCategoryById_IdIsNull()
+    {
+        Guid? id = null;
+
+        var foundCategory = _transactionsCategories.GetTransactionCategoryById(id);
+        
+        Assert.Null(foundCategory);
+    }
+
+    [Fact]
+    public void GetTransactionCategoryById_IdGivenProperly()
+    {
+        var categoryToAdd = new TransactionCategoryAddRequest
+        {
+            CategoryName = "Abcdef"
+        };
+
+        var addedCategory = _transactionsCategories.AddTransactionCategory(categoryToAdd);
+
+        var foundCategory = _transactionsCategories.GetTransactionCategoryById(addedCategory.CategoryId);
+
+        Assert.Equal(addedCategory, foundCategory);
+    }
+    
+    #endregion
+
+    #region UpdateTransactionCategory
+
+    /*
+     * Test requirements:
+     * 1. When TransactionCategoryUpdateRequest is null, it should throw ArgumentNullException
+     * 2. When CategoryId is null or invalid, it should throw ArgumentException
+     * 3. When CategoryName is null or invalid, it should throw ArgumentException
+     * 4. When values are given properly, category should be updated
+     */
+
+    // 1. TransactionCategoryUpdateRequest is null
+    [Fact]
+    public void UpdateTransactionCategory_UpdateRequestIsNull()
+    {
+        TransactionCategoryUpdateRequest? categoryUpdateRequest = null;
+
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            _transactionsCategories.UpdateTransactionCategory(categoryUpdateRequest);
+        });
+    }
+
+    // 2. CategoryId is null or invalid
+    [Fact]
+    public void UpdateTransactionCategory_CategoryIdIsNull()
+    {
+        var categoryToUpdate = new TransactionCategoryUpdateRequest
+        {
+            CategoryId = Guid.NewGuid(),
+            CategoryName = "Fifarafa"
+        };
+
+        Assert.Throws<ArgumentException>(() =>
+        {
+            _transactionsCategories.UpdateTransactionCategory(categoryToUpdate);
+        });
+    }
+
+    // 3. CategoryName is null or invalid
+    [Fact]
+    public void UpdateTransactionCategory_CategoryNameIsNullOrInvalid()
+    {
+        var categoryToAdd = new TransactionCategoryAddRequest
+        {
+            CategoryName = "Blablabla"
+        };
+
+        var addedCategory = _transactionsCategories.AddTransactionCategory(categoryToAdd);
+        
+        _testOutputHelper.WriteLine($"Created category:\n{addedCategory}");
+
+        // Updating category
+        var categoryUpdateRequest = addedCategory.ToTransactionCategoryUpdateRequest();
+        
+        // Non-literals characters
+        categoryUpdateRequest.CategoryName = "Abc1234";
+        _testOutputHelper.WriteLine($"\n\nUpdate request:\n{categoryUpdateRequest.CategoryName}");
+
+        Assert.Throws<ArgumentException>(() =>
+        {
+            _transactionsCategories.UpdateTransactionCategory(categoryUpdateRequest);
+        });
+    }
+    
+    // 4. Values are given properly
+    [Fact]
+    public void UpdateTransactionCategory_ValuesAreGivenProperly()
+    {
+        var categoryToAdd = new TransactionCategoryAddRequest
+        {
+            CategoryName = "Bombito"
+        };
+
+        var addedCategory = _transactionsCategories.AddTransactionCategory(categoryToAdd);
+        _testOutputHelper.WriteLine($"Created category:\n{addedCategory}");
+        
+        var categoryToUpdate = addedCategory.ToTransactionCategoryUpdateRequest();
+        categoryToUpdate.CategoryName = "UpdatedName";
+        _testOutputHelper.WriteLine($"\n\nCatgoryToUpdate:\n{categoryToUpdate.CategoryName}");
+        
+        var updatedCategoryResponse = _transactionsCategories.UpdateTransactionCategory(categoryToUpdate);
+        _testOutputHelper.WriteLine($"\n\nUpdated category:\n{updatedCategoryResponse}");
+        
+        var categoryFromGet = _transactionsCategories.GetTransactionCategoryById(updatedCategoryResponse.CategoryId);
+        
+        Assert.Equal(categoryFromGet, updatedCategoryResponse);
+    }
+    
+    #endregion
 }

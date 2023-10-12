@@ -9,7 +9,7 @@ public interface ITransactionsCategoriesService
 
     public List<TransactionCategoryResponse> GetAllTransactionCategories();
 
-    public List<TransactionCategoryResponse> GetTransactionCategoryById(Guid? categoryId);
+    public TransactionCategoryResponse? GetTransactionCategoryById(Guid? categoryId);
 
     public TransactionCategoryResponse UpdateTransactionCategory(TransactionCategoryUpdateRequest? categoryUpdateRequest);
 

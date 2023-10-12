@@ -30,6 +30,15 @@ public class TransactionCategoryResponse
     {
         return $"CategoryId:{CategoryId}, CategoryName:{CategoryName}";
     }
+
+    public TransactionCategoryUpdateRequest ToTransactionCategoryUpdateRequest()
+    {
+        return new TransactionCategoryUpdateRequest
+        {
+            CategoryId = CategoryId,
+            CategoryName = CategoryName
+        };
+    }
 }
 
 public static class TransactionCategoryExtension
