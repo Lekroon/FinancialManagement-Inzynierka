@@ -10,7 +10,7 @@ public class TransactionCategoriesServiceTest
 
     public TransactionCategoriesServiceTest(ITestOutputHelper testOutputHelper)
     {
-        _transactionsCategories = new TransactionCategoriesService();
+        _transactionsCategories = new TransactionCategoriesService(false);
         
         
         _testOutputHelper = testOutputHelper;
@@ -119,6 +119,7 @@ public class TransactionCategoriesServiceTest
 
         // Act
         var categoryResponse = _transactionsCategories.AddTransactionCategory(categoryToAdd);
+        _testOutputHelper.WriteLine($"Added category: {categoryResponse}");
         
         var categoryList = _transactionsCategories.GetAllTransactionCategories();
         
@@ -127,5 +128,55 @@ public class TransactionCategoriesServiceTest
         Assert.Contains(categoryResponse, categoryList);
     }
 
+    #endregion
+
+    #region GetAllTransactionCategories
+    
+    /*
+     * Test requirements:
+     * 1. Without adding any categories, list should be empty by default
+     * 2. It should return every properly added category
+     */
+
+    [Fact]
+    public void GetAllTransactionCategories_ListShouldBeEmpty()
+    {
+        // Acts
+        var responseList = _transactionsCategories.GetAllTransactionCategories();
+        
+        // Assert
+        Assert.Empty(responseList);
+    }
+
+    [Fact]
+    public void GetAllTransactionCategories_ReturnAddedCategory()
+    {
+        var categoryToAdd1 = new TransactionCategoryAddRequest { CategoryName = "Something something"};
+        var categoryToAdd2 = new TransactionCategoryAddRequest { CategoryName = "Random Category"};
+        var categoryToAdd3 = new TransactionCategoryAddRequest { CategoryName = "Oooh aaah bomba"};
+
+        var categoryResponse1 = _transactionsCategories.AddTransactionCategory(categoryToAdd1);
+        _testOutputHelper.WriteLine("Created category #1:\n" + categoryResponse1);
+
+        var categoryResponse2 = _transactionsCategories.AddTransactionCategory(categoryToAdd2);
+        _testOutputHelper.WriteLine("Created category #2:\n" + categoryResponse2);
+
+        var categoryResponse3 = _transactionsCategories.AddTransactionCategory(categoryToAdd3);
+        _testOutputHelper.WriteLine("Created category #3:\n" + categoryResponse3);
+
+        var categoriesList = _transactionsCategories.GetAllTransactionCategories();
+        
+        _testOutputHelper.WriteLine("\n\nCategory list:");
+        foreach (var category in categoriesList)
+        {
+            _testOutputHelper.WriteLine(category.ToString());
+        }
+        
+        foreach (var expectedCategory in categoriesList)
+        {
+            Assert.Contains(expectedCategory, categoriesList);
+        }
+    }
+    
     #endregion
 }

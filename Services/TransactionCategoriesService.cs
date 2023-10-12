@@ -80,7 +80,7 @@ public class TransactionCategoriesService : ITransactionsCategoriesService
 
     public List<TransactionCategoryResponse> GetAllTransactionCategories()
     {
-        throw new NotImplementedException();
+        return _listOfCategories.Select(category => category.ToTransactionCategoryResponse()).ToList();
     }
 
     public List<TransactionCategoryResponse> GetTransactionCategoryById(Guid? categoryId)
