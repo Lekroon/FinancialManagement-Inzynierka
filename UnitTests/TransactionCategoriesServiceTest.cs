@@ -304,4 +304,41 @@ public class TransactionCategoriesServiceTest
     }
     
     #endregion
+
+    #region DeleteTransactionCategory
+
+    /*
+     * Test requirements:
+     * 1. If given id is invalid, it should return false
+     * 2. If given id is valid, it should return true and delete existing financial account
+     */
+    
+    //1. Given id is invalid
+    [Fact]
+    public void DeleteTransactionCategory_InvalidId()
+    {
+        var id = Guid.NewGuid();
+
+        var isDeleted = _transactionsCategories.DeleteTransactionCategory(id);
+        
+        Assert.False(isDeleted);
+    }
+    
+    // 2. Given id is valid
+    [Fact]
+    public void DeleteTransactionCategory_IdIsValid()
+    {
+        var categoryToAdd = new TransactionCategoryAddRequest
+        {
+            CategoryName = "ToDelete"
+        };
+
+        var addedCategory = _transactionsCategories.AddTransactionCategory(categoryToAdd);
+
+        var isDeleted = _transactionsCategories.DeleteTransactionCategory(addedCategory.CategoryId);
+        
+        Assert.True(isDeleted);
+    }
+    
+    #endregion
 }

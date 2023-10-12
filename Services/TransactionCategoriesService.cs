@@ -116,6 +116,18 @@ public class TransactionCategoriesService : ITransactionsCategoriesService
 
     public bool DeleteTransactionCategory(Guid? categoryId)
     {
-        throw new NotImplementedException();
+        if (categoryId == null)
+        {
+            throw new ArgumentNullException(nameof(categoryId));
+        }
+
+        var foundCategory = _listOfCategories.FirstOrDefault(category => category.CategoryId == categoryId);
+
+        if (foundCategory == null)
+            return false;
+
+        _listOfCategories.RemoveAll(category => category.CategoryId == categoryId);
+
+        return true;
     }
 }
