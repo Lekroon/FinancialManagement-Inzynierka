@@ -14,6 +14,9 @@ public class FinancialAccountUpdateRequest
     [Required]
     [Range(0, double.MaxValue, ErrorMessage = "Balance cannot be negative")]
     public decimal? Balance { get; set; }
+    
+    [Required]
+    public Guid? CurrencyId { get; set; }
 
     public Entities.FinancialAccount ToFinancialAccount()
     {
@@ -21,7 +24,8 @@ public class FinancialAccountUpdateRequest
         {
             AccountId = AccountId,
             AccountName = AccountName,
-            Balance = Balance
+            Balance = Balance,
+            CurrencyId = CurrencyId
         };
     }
 }

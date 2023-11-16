@@ -247,6 +247,14 @@ public class FinancialAccountsService : IFinancialAccountsService
             throw new ArgumentException("Given financial account ID doesn't exist");
         }
         
+        // if currency doesn't exists
+        var matchingCurrency = _currenciesService.GetCurrencyByCurrencyId(accountUpdateRequest.CurrencyId);
+
+        if (matchingCurrency == null)
+        {
+            throw new ArgumentException("Given currency ID doesn't exist");
+        }
+        
         // update financial account
         matchingAccount.AccountName = accountUpdateRequest.AccountName;
         matchingAccount.Balance = accountUpdateRequest.Balance;

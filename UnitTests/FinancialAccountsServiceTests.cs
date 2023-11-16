@@ -785,6 +785,7 @@ public class FinancialAccountsServiceTests
      * 2. When AccountId is null or invalid, it should throw ArgumentException
      * 3. When AccountName is null or invalid, it should throw ArgumentException
      * 4. When Balance is null or invalid, it should throw ArgumentException
+     * 5. When currency is null or invalid, it should throw ArgumentException
      */
     
     // 1. FinancialAccountUpdateRequest is null
@@ -870,7 +871,8 @@ public class FinancialAccountsServiceTests
         _testOutputHelper.WriteLine("UPDATE REQUEST:");
         _testOutputHelper.WriteLine($"Account ID: {accountUpdateRequest.AccountId}\n" +
                                     $"Account name: {accountUpdateRequest.AccountName}\n" +
-                                    $"Balance: {accountUpdateRequest.Balance}\n");
+                                    $"Balance: {accountUpdateRequest.Balance}\n" +
+                                    $"CurrencyId: {accountUpdateRequest.CurrencyId}\n");
 
         // more than 60 characters
         accountUpdateRequest.AccountName = "0123456789012345678901234567890123456789012345678901234567890123456789";
@@ -934,7 +936,8 @@ public class FinancialAccountsServiceTests
         _testOutputHelper.WriteLine("UPDATE REQUEST:");
         _testOutputHelper.WriteLine($"Account ID: {accountUpdateRequest.AccountId}\n" +
                                     $"Account name: {accountUpdateRequest.AccountName}\n" +
-                                    $"Balance: {accountUpdateRequest.Balance}\n");
+                                    $"Balance: {accountUpdateRequest.Balance}\n" +
+                                    $"CurrencyId: {accountUpdateRequest.CurrencyId}\n");
 
         accountUpdateRequest.AccountName = "Modified";
         accountUpdateRequest.Balance = null;
@@ -946,39 +949,40 @@ public class FinancialAccountsServiceTests
         });
     }
     
-    // 5. If update values are correct, account should be updated
+    // 5. Currency is null or incorrect
     [Fact]
-    public void UpdateFinancialAccount_ProperUpdateValues()
+    public void UpdateFinancialAccount_CurrencyIsNullOrIncorrect()
     {
-        // Arrange
+         // Arrange
         // creating account
         var currencyAddRequest = new CurrencyAddRequest
         {
-            CurrencyName = "PLN"
+            CurrencyName = "EUR"
         };
         var currencyResponse = _currenciesService.AddCurrency(currencyAddRequest);
 
         var countryAddRequest = new CountryAddRequest
         {
             CountryCurrency = currencyResponse.CurrencyId,
-            CountryName = "Poland"
+            CountryName = "Germany"
         };
         var countryResponse = _countriesService.AddCountry(countryAddRequest);
 
         var userAddRequest = new UserAddRequest
         {
             CountryId = countryResponse.CountryId,
-            Email = "jakistamMail@gmail.com",
+            Email = "myMainMail@gmail.com",
             IsActive = true,
-            Login = "MojLogin123!",
-            Password = "123456789"
+            Login = "UnbreakableLogin11!",
+            Password = "Unbreak4bleP4ssw0rd",
+            PhoneNumber = "511622733"
         };
         var userResponse = _usersService.AddUser(userAddRequest);
 
         var accountAddRequest = new FinancialAccountAddRequest
         {
-            AccountName = "AccountBeforeModification",
-            Balance = 9999.199m,
+            AccountName = "Drugie konto przed mody",
+            Balance = 5000,
             CurrencyId = currencyResponse.CurrencyId,
             UserId = userResponse.UserId
         };
@@ -997,17 +1001,91 @@ public class FinancialAccountsServiceTests
         _testOutputHelper.WriteLine("UPDATE REQUEST:");
         _testOutputHelper.WriteLine($"Account ID: {accountUpdateRequest.AccountId}\n" +
                                     $"Account name: {accountUpdateRequest.AccountName}\n" +
-                                    $"Balance: {accountUpdateRequest.Balance}\n");
+                                    $"Balance: {accountUpdateRequest.Balance}\n" +
+                                    $"CurrencyId: {accountUpdateRequest.CurrencyId}\n");
+
+        accountUpdateRequest.CurrencyId = Guid.NewGuid();
+
+        // Assert
+        Assert.Throws<ArgumentException>(() =>
+        {
+            _financialAccountsService.UpdateFinancialAccount(accountUpdateRequest);
+        });
+    }
+    
+    // 6. If update values are correct, account should be updated
+    [Fact]
+    public void UpdateFinancialAccount_ProperUpdateValues()
+    {
+        // Arrange
+        // creating account
+        var currencyAddRequest1 = new CurrencyAddRequest
+        {
+            CurrencyName = "PLN"
+        };
+        var currencyResponse1 = _currenciesService.AddCurrency(currencyAddRequest1);
+
+        var currencyAddRequest2 = new CurrencyAddRequest
+        {
+            CurrencyName = "EUR"
+        };
+        var currencyResponse2 = _currenciesService.AddCurrency(currencyAddRequest2);
+
+        var countryAddRequest = new CountryAddRequest
+        {
+            CountryCurrency = currencyResponse1.CurrencyId,
+            CountryName = "Poland"
+        };
+        var countryResponse = _countriesService.AddCountry(countryAddRequest);
+
+        var userAddRequest = new UserAddRequest
+        {
+            CountryId = countryResponse.CountryId,
+            Email = "jakistamMail@gmail.com",
+            IsActive = true,
+            Login = "MojLogin123!",
+            Password = "123456789"
+        };
+        var userResponse = _usersService.AddUser(userAddRequest);
+
+        var accountAddRequest = new FinancialAccountAddRequest
+        {
+            AccountName = "AccountBeforeModification",
+            Balance = 9999.199m,
+            CurrencyId = currencyResponse1.CurrencyId,
+            UserId = userResponse.UserId
+        };
+        var accountResponse = _financialAccountsService.AddFinancialAccount(accountAddRequest);
+        
+        _testOutputHelper.WriteLine("GENERATED OBJECTS:");
+        _testOutputHelper.WriteLine("1. CURRENCY 1:\n" + currencyResponse1);
+        _testOutputHelper.WriteLine("2. CURRENCY 2:\n" + currencyResponse2);
+        _testOutputHelper.WriteLine("3. COUNTRY:\n" + countryResponse);
+        _testOutputHelper.WriteLine("4. USER:\n" + userResponse);
+        _testOutputHelper.WriteLine("5. FINANCIAL ACCOUNT:\n" + accountResponse);
+        
+        // updating account
+        var accountUpdateRequest = accountResponse.ToFinancialAccountUpdateRequest();
+        
+        _testOutputHelper.WriteLine("--------------------------------------------");
+        _testOutputHelper.WriteLine("UPDATE REQUEST:");
+        _testOutputHelper.WriteLine("UPDATE REQUEST:");
+        _testOutputHelper.WriteLine($"Account ID: {accountUpdateRequest.AccountId}\n" +
+                                    $"Account name: {accountUpdateRequest.AccountName}\n" +
+                                    $"Balance: {accountUpdateRequest.Balance}\n" +
+                                    $"CurrencyId: {accountUpdateRequest.CurrencyId}\n");
 
         accountUpdateRequest.AccountName = "ModifiedAccountName";
         accountUpdateRequest.Balance = 1000;
+        accountUpdateRequest.CurrencyId = Guid.Parse("C0461F37-B50F-4CA7-8015-D040AAFC3DCE");
 
         var updatedAccountResponse = _financialAccountsService.UpdateFinancialAccount(accountUpdateRequest);
         
         _testOutputHelper.WriteLine("\nUPDATED FINANCIAL ACCOUNT:");
         _testOutputHelper.WriteLine($"Account ID: {updatedAccountResponse.AccountId}\n" +
                                     $"Account name: {updatedAccountResponse.AccountName}\n" +
-                                    $"Balance: {updatedAccountResponse.Balance}\n");
+                                    $"Balance: {updatedAccountResponse.Balance}\n" +
+                                    $"CurrencyId: {updatedAccountResponse.CurrencyId}\n");
         
         // Act
         var financialAccountFromGet = _financialAccountsService.GetFinancialAccountById(updatedAccountResponse.AccountId);
