@@ -164,4 +164,40 @@ public class UsersService : IUsersService
         return foundUser == null ? null : ConvertUserToUserResponse(foundUser);
 
     }
+
+    public UserResponse UpdateUser(UserUpdateRequest? userUpdateRequest)
+    {
+        if (userUpdateRequest == null)
+        {
+            throw new ArgumentNullException(nameof(userUpdateRequest));
+        }
+
+        ValidationHelper.ModelValidation(userUpdateRequest);
+        
+        // object to update
+        var matchingUser = _listOfUsers.FirstOrDefault(user => user.UserId == userUpdateRequest.UserId);
+
+        if (matchingUser == null)
+        {
+            throw new ArgumentException("Given user ID doesn't exists");
+        }
+        
+        // email or password repeated
+        if (matchingUser.Password == userUpdateRequest.Password)
+        {
+            throw new ArgumentException("New password must be different from current password");
+        }
+        
+        if (matchingUser.Email == userUpdateRequest.Email)
+        {
+            throw new ArgumentException("New email must be different from current email");
+        }
+        
+        // update user
+        matchingUser.Password = userUpdateRequest.Password;
+        matchingUser.Email = userUpdateRequest.Email;
+        matchingUser.PhoneNumber = userUpdateRequest.PhoneNumber;
+
+        return matchingUser.ToUserResponse();
+    }
 }

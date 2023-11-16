@@ -20,6 +20,20 @@ public class TransactionAddRequest
     
     [Required]
     public TransactionTypes? TransactionType { get; set; }
+    
+    [Required]
+    public bool? IsRecurring { get; set; }
+    
+    public DateTime? RecurringDate { get; set; }
+    
+    public string? Description { get; set; }
+    
+    [Required]
+    public bool? IsReminderSet { get; set; }
+    
+    [Required]
+    public ReminderSendingOptions? SendingMethod { get; set; }
+    
 
     public Entities.Transaction ToTransaction()
     {
@@ -29,7 +43,12 @@ public class TransactionAddRequest
             CategoryId = CategoryId,
             Amount = Amount,
             TransactionDate = TransactionDate,
-            TransactionType = TransactionType.ToString()
+            TransactionType = TransactionType.ToString(),
+            IsRecurring = IsRecurring,
+            RecurringDate = RecurringDate,
+            Description = Description,
+            IsReminderSet = IsReminderSet,
+            SendingMethod = SendingMethod.ToString()
         };
     }
 }

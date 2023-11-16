@@ -58,6 +58,17 @@ public class UserResponse
             $"UserId:{UserId}, Login:{Login}, Password:{Password}, Email:{Email}, Phone(optional):{PhoneNumber}, " +
             $"CountryId: {CountryId}, IsActive:{IsActive}, CountryName:{CountryName}";
     }
+
+    public UserUpdateRequest ToUserUpdateRequest()
+    {
+        return new UserUpdateRequest
+        {
+            UserId = UserId,
+            Email = Email,
+            PhoneNumber = PhoneNumber,
+            Password = Password
+        };
+    }
 }
 
 public static class UserExtensions

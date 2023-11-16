@@ -33,4 +33,6 @@ public interface IUsersService
     /// <param name="loginOrEmail">Represents user login or email that you want to search</param>
     /// <returns>Matching user object as UserResponse</returns>
     UserResponse? GetUserByUserLoginOrEmail(string? loginOrEmail);
+    
+    UserResponse UpdateUser(UserUpdateRequest? userUpdateRequest);
 }

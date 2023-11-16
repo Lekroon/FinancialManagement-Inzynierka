@@ -415,4 +415,316 @@ public class UsersServiceTest
 
 
     #endregion
+
+    #region UpdateUser
+
+    /*
+     * Test requirements:
+     * 1. When UserUpdateRequest is null, it should return null
+     * 2. When UserId is null or invalid, it should throw ArgumentException
+     * 3. When Password is null or invalid, it should throw ArgumentException
+     * 4. When Password is the same as previous one, it should throw ArgumentException
+     * 5. When Email is null or invalid, it should throw ArgumentException
+     * 6. When Email is the same as previous one, it should throw ArgumentException
+     */
+    
+    // 1. UserUpdateRequest is null
+    [Fact]
+    public void UpdateUser_UserUpdateRequestIsNull()
+    {
+        UserUpdateRequest? userUpdateRequest = null;
+        
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            _usersService.UpdateUser(userUpdateRequest);
+        });
+    }
+    
+    // 2. When UserId is null or invalid
+    [Fact]
+    public void UpdateUser_UserIdIsNullOrInvalid()
+    {
+        var userUpdateRequest = new UserUpdateRequest()
+        {
+            UserId = Guid.NewGuid(),
+            Email = "email@gmail.com",
+            Password = "blablablaxD123",
+        };
+
+        Assert.Throws<ArgumentException>(() =>
+        {
+            _usersService.UpdateUser(userUpdateRequest);
+        });
+    }
+    
+    // 3. Password is null or invalid
+    [Fact]
+    public void UpdateUser_PasswordIsNullOrInvalid()
+    {
+        // currency
+        var currencyAddRequest = new CurrencyAddRequest
+        {
+            CurrencyName = "PLN"
+        };
+        var currencyResponse = _currenciesService.AddCurrency(currencyAddRequest);
+
+        // country
+        var countryAddRequest = new CountryAddRequest
+        {
+            CountryCurrency = currencyResponse.CurrencyId,
+            CountryName = "Poland"
+        };
+        var countryResponse = _countriesService.AddCountry(countryAddRequest);
+        
+        // user
+        var userAddRequest = new UserAddRequest
+        {
+            CountryId = countryResponse.CountryId,
+            Email = "oldEmail@gmail.com",
+            IsActive = false,
+            Login = "MySuperLogin123",
+            Password = "SomeOldPass123"
+        };
+        var userResponse = _usersService.AddUser(userAddRequest);
+        
+        _outputHelper.WriteLine("GENERATED OBJECTS:");
+        _outputHelper.WriteLine("1. CURRENCY:\n" + currencyResponse);
+        _outputHelper.WriteLine("2. COUNTRY:\n" + countryResponse);
+        _outputHelper.WriteLine("3. USER:\n" + userResponse);
+
+        var userUpdateRequest = userResponse.ToUserUpdateRequest();
+        
+        _outputHelper.WriteLine("--------------------------------------------");
+        _outputHelper.WriteLine("UPDATE REQUEST:");
+        _outputHelper.WriteLine($"User ID: {userUpdateRequest.UserId}\n" +
+                                $"Password: {userUpdateRequest.Password}\n" +
+                                $"Email: {userUpdateRequest.Email}\n" +
+                                $"Phone: {userUpdateRequest.PhoneNumber}");
+        
+        // Invalid password - less than 8 characters
+        userUpdateRequest.Password = "123";
+
+        Assert.Throws<ArgumentException>(() =>
+        {
+            _usersService.UpdateUser(userUpdateRequest);
+        });
+    }
+    
+    // 4. Password is the same as previous
+    [Fact]
+    public void UserUpdate_RepeatedPassword()
+    {
+        // currency
+        var currencyAddRequest = new CurrencyAddRequest
+        {
+            CurrencyName = "PLN"
+        };
+        var currencyResponse = _currenciesService.AddCurrency(currencyAddRequest);
+
+        // country
+        var countryAddRequest = new CountryAddRequest
+        {
+            CountryCurrency = currencyResponse.CurrencyId,
+            CountryName = "Poland"
+        };
+        var countryResponse = _countriesService.AddCountry(countryAddRequest);
+        
+        // user
+        var userAddRequest = new UserAddRequest
+        {
+            CountryId = countryResponse.CountryId,
+            Email = "oldEmail@gmail.com",
+            IsActive = false,
+            Login = "MySuperLogin123",
+            Password = "SomeOldPass123"
+        };
+        var userResponse = _usersService.AddUser(userAddRequest);
+        
+        _outputHelper.WriteLine("GENERATED OBJECTS:");
+        _outputHelper.WriteLine("1. CURRENCY:\n" + currencyResponse);
+        _outputHelper.WriteLine("2. COUNTRY:\n" + countryResponse);
+        _outputHelper.WriteLine("3. USER:\n" + userResponse);
+
+        var userUpdateRequest = userResponse.ToUserUpdateRequest();
+        
+        _outputHelper.WriteLine("--------------------------------------------");
+        _outputHelper.WriteLine("UPDATE REQUEST:");
+        _outputHelper.WriteLine($"User ID: {userUpdateRequest.UserId}\n" +
+                                $"Password: {userUpdateRequest.Password}\n" +
+                                $"Email: {userUpdateRequest.Email}\n" +
+                                $"Phone: {userUpdateRequest.PhoneNumber}");
+
+        userUpdateRequest.Password = "SomeOldPass123";
+
+        Assert.Throws<ArgumentException>(() =>
+        {
+            _usersService.UpdateUser(userUpdateRequest);
+        });
+    }
+    
+    // 5. Email is null or invalid
+    [Fact]
+    public void UserUpdate_EmailIsNullOrInvalid()
+    {
+        // currency
+        var currencyAddRequest = new CurrencyAddRequest
+        {
+            CurrencyName = "PLN"
+        };
+        var currencyResponse = _currenciesService.AddCurrency(currencyAddRequest);
+
+        // country
+        var countryAddRequest = new CountryAddRequest
+        {
+            CountryCurrency = currencyResponse.CurrencyId,
+            CountryName = "Poland"
+        };
+        var countryResponse = _countriesService.AddCountry(countryAddRequest);
+        
+        // user
+        var userAddRequest = new UserAddRequest
+        {
+            CountryId = countryResponse.CountryId,
+            Email = "oldEmail@gmail.com",
+            IsActive = false,
+            Login = "MySuperLogin123",
+            Password = "SomeOldPass123"
+        };
+        var userResponse = _usersService.AddUser(userAddRequest);
+        
+        _outputHelper.WriteLine("GENERATED OBJECTS:");
+        _outputHelper.WriteLine("1. CURRENCY:\n" + currencyResponse);
+        _outputHelper.WriteLine("2. COUNTRY:\n" + countryResponse);
+        _outputHelper.WriteLine("3. USER:\n" + userResponse);
+
+        var userUpdateRequest = userResponse.ToUserUpdateRequest();
+        
+        _outputHelper.WriteLine("--------------------------------------------");
+        _outputHelper.WriteLine("UPDATE REQUEST:");
+        _outputHelper.WriteLine($"User ID: {userUpdateRequest.UserId}\n" +
+                                $"Password: {userUpdateRequest.Password}\n" +
+                                $"Email: {userUpdateRequest.Email}\n" +
+                                $"Phone: {userUpdateRequest.PhoneNumber}");
+        
+        // Invalid email
+        userUpdateRequest.Email = "newemail.pl";
+
+        Assert.Throws<ArgumentException>(() =>
+        {
+            _usersService.UpdateUser(userUpdateRequest);
+        });
+    }
+    
+    // 6. Email is the same as previous one
+    [Fact]
+    public void UserUpdate_EmailRepeated()
+    {
+        // currency
+        var currencyAddRequest = new CurrencyAddRequest
+        {
+            CurrencyName = "PLN"
+        };
+        var currencyResponse = _currenciesService.AddCurrency(currencyAddRequest);
+
+        // country
+        var countryAddRequest = new CountryAddRequest
+        {
+            CountryCurrency = currencyResponse.CurrencyId,
+            CountryName = "Poland"
+        };
+        var countryResponse = _countriesService.AddCountry(countryAddRequest);
+        
+        // user
+        var userAddRequest = new UserAddRequest
+        {
+            CountryId = countryResponse.CountryId,
+            Email = "oldEmail@gmail.com",
+            IsActive = false,
+            Login = "MySuperLogin123",
+            Password = "SomeOldPass123"
+        };
+        var userResponse = _usersService.AddUser(userAddRequest);
+        
+        _outputHelper.WriteLine("GENERATED OBJECTS:");
+        _outputHelper.WriteLine("1. CURRENCY:\n" + currencyResponse);
+        _outputHelper.WriteLine("2. COUNTRY:\n" + countryResponse);
+        _outputHelper.WriteLine("3. USER:\n" + userResponse);
+
+        var userUpdateRequest = userResponse.ToUserUpdateRequest();
+        
+        _outputHelper.WriteLine("--------------------------------------------");
+        _outputHelper.WriteLine("UPDATE REQUEST:");
+        _outputHelper.WriteLine($"User ID: {userUpdateRequest.UserId}\n" +
+                                $"Password: {userUpdateRequest.Password}\n" +
+                                $"Email: {userUpdateRequest.Email}\n" +
+                                $"Phone: {userUpdateRequest.PhoneNumber}");
+
+        userUpdateRequest.Email = "oldEmail@gmail.com";
+
+        Assert.Throws<ArgumentException>(() =>
+        {
+            _usersService.UpdateUser(userUpdateRequest);
+        });
+    }
+    
+    // 7. Correctly updated user
+    [Fact]
+    public void UpdateUser_ProperUpdateValues()
+    {
+        // currency
+        var currencyAddRequest = new CurrencyAddRequest
+        {
+            CurrencyName = "PLN"
+        };
+        var currencyResponse = _currenciesService.AddCurrency(currencyAddRequest);
+
+        // country
+        var countryAddRequest = new CountryAddRequest
+        {
+            CountryCurrency = currencyResponse.CurrencyId,
+            CountryName = "Poland"
+        };
+        var countryResponse = _countriesService.AddCountry(countryAddRequest);
+        
+        // user
+        var userAddRequest = new UserAddRequest
+        {
+            CountryId = countryResponse.CountryId,
+            Email = "oldEmail@gmail.com",
+            IsActive = false,
+            Login = "MySuperLogin123",
+            Password = "SomeOldPass123"
+        };
+        var userResponse = _usersService.AddUser(userAddRequest);
+        
+        _outputHelper.WriteLine("GENERATED OBJECTS:");
+        _outputHelper.WriteLine("1. CURRENCY:\n" + currencyResponse);
+        _outputHelper.WriteLine("2. COUNTRY:\n" + countryResponse);
+        _outputHelper.WriteLine("3. USER:\n" + userResponse);
+
+        var userUpdateRequest = userResponse.ToUserUpdateRequest();
+        
+        _outputHelper.WriteLine("--------------------------------------------");
+        _outputHelper.WriteLine("UPDATE REQUEST:");
+        _outputHelper.WriteLine($"User ID: {userUpdateRequest.UserId}\n" +
+                                $"Password: {userUpdateRequest.Password}\n" +
+                                $"Email: {userUpdateRequest.Email}\n" +
+                                $"Phone: {userUpdateRequest.PhoneNumber}");
+
+        userUpdateRequest.Email = "completlyNewEmail@gmail.com";
+        userUpdateRequest.Password = "superStrongNewPassword13!";
+        userUpdateRequest.PhoneNumber = "555-111-222";
+
+        var updatedUserResponse = _usersService.UpdateUser(userUpdateRequest);
+        
+        _outputHelper.WriteLine("\n\n--------------------------------------------");
+        _outputHelper.WriteLine("UPDATED USER:");
+        _outputHelper.WriteLine(updatedUserResponse.ToString());
+
+        var userFromGet = _usersService.GetUserByUserId(updatedUserResponse.UserId);
+
+        Assert.Equal(userFromGet, updatedUserResponse);
+    }
+    
+    #endregion
 }

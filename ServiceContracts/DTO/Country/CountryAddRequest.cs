@@ -3,7 +3,7 @@
 namespace ServiceContracts.DTO.Country;
 
 /// <summary>
-/// DTO class for adding new User
+/// DTO class for adding new Country
 /// </summary>
 public class CountryAddRequest
 {
