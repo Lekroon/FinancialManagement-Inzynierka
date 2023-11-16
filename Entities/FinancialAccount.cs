@@ -1,7 +1,10 @@
-﻿namespace Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Entities;
 
 public class FinancialAccount
 {
+    [Key]
     public Guid? AccountId { get; set; }
     public Guid? UserId { get; set; }
     public Guid? CurrencyId { get; set; }

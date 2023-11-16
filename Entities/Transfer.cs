@@ -1,7 +1,10 @@
-﻿namespace Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Entities;
 
 public class Transfer
 {
+    [Key]
     public Guid TransferId { get; set; }
     public Guid? SenderAccountId { get; set; }
     public Guid? RecipientAccountId { get; set; }

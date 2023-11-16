@@ -1,10 +1,13 @@
-﻿namespace Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Entities;
 
 /// <summary>
 /// Domain model used for storing User details
 /// </summary>
 public class User
 {
+    [Key]
     public Guid UserId { get; set; }
     public string? Login { get; set; }
     public string? Password { get; set; }

@@ -1,7 +1,10 @@
-﻿namespace Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Entities;
 
 public class ExpenseLimit
 {
+    [Key]
     public Guid LimitId { get; set; }
     public Guid? AccountId { get; set; }
     public Guid? CategoryId { get; set; }

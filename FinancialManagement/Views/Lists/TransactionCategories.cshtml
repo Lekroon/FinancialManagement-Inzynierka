@@ -1,0 +1,25 @@
+﻿@model IEnumerable<TransactionCategoryResponse>
+
+@{
+    ViewBag.Title = "Transaction categories list";
+}
+
+<h1>Transaction categories list</h1>
+
+<table class="table w-100 mt">
+    <thead>
+        <tr>
+            <th>Category ID</th>
+            <th>Category Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.CategoryId</td>
+                <td>@category.CategoryName</td>
+            </tr>
+        }
+    </tbody>
+</table>

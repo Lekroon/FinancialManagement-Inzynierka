@@ -18,11 +18,9 @@ public interface ITransactionsService
     public List<TransactionResponse> GetSortedTransactions(List<TransactionResponse> allTransactions,
         string sortBy, SortOrderOptions sortOrder);
 
-    public List<TransactionResponse> GetTransactionsByCategory(string? category);
+    public List<TransactionResponse> GetTransactionsByCategory(Guid? categoryId);
     
     public List<TransactionResponse> GetTransactionsByType(TransactionTypes? type);
-
-    public List<TransactionResponse> GetCyclicalTransactions(); // ?????????????
 
     public TransactionResponse UpdateTransaction(TransactionUpdateRequest transactionUpdateRequest);
 }

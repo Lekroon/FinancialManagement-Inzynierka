@@ -12,16 +12,19 @@ public class ListsController : Controller
     private readonly ICountriesService _countriesService;
     private readonly IUsersService _usersService;
     private readonly IFinancialAccountsService _financialAccountsService;
+    private readonly ITransactionsCategoriesService _transactionsCategoriesService;
 
     public ListsController(ICurrenciesService currenciesService, 
         ICountriesService countriesService, 
         IUsersService usersService,
-        IFinancialAccountsService financialAccountsService)
+        IFinancialAccountsService financialAccountsService,
+        ITransactionsCategoriesService transactionsCategoriesService)
     {
         _currenciesService = currenciesService;
         _countriesService = countriesService;
         _usersService = usersService;
         _financialAccountsService = financialAccountsService;
+        _transactionsCategoriesService = transactionsCategoriesService;
     }
     
     [Route("currencies")]
@@ -64,5 +67,13 @@ public class ListsController : Controller
         ViewBag.SortOrder = sortOrder.ToString();
         
         return View(sortedFinancialAccounts);
+    }
+    
+    [Route("categories")]
+    public IActionResult TransactionCategories()
+    {
+        var allCategories = _transactionsCategoriesService.GetAllTransactionCategories();
+        
+        return View(allCategories);
     }
 }
