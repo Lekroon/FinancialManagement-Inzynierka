@@ -19,6 +19,7 @@ public class TransactionAddRequest
     public DateTime? TransactionDate { get; set; }
     
     [Required]
+    [MaxLength(10)]
     public TransactionTypes? TransactionType { get; set; }
     
     [Required]
@@ -32,6 +33,7 @@ public class TransactionAddRequest
     public bool? IsReminderSet { get; set; }
     
     [Required]
+    [MaxLength(10)]
     public ReminderSendingOptions? SendingMethod { get; set; }
     
 

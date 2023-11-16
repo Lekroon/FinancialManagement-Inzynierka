@@ -9,6 +9,9 @@ public class Country
 {
     [Key]
     public Guid CountryId { get; set; }
+    
     public Guid? CurrencyId { get; set; }
+    
+    [StringLength(20)]
     public string? CountryName { get; set; }
 }

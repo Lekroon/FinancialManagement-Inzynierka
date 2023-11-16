@@ -12,6 +12,7 @@ public class CountryAddRequest
     
     [Required]
     [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Use letters only!")]
+    [MaxLength(20)]
     public string? CountryName { get; set; }
 
     public Entities.Country ToCountry()

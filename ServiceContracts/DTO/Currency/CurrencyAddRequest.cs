@@ -6,6 +6,8 @@ public class CurrencyAddRequest
 {
     [Required]
     [RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Use letters only!")]
+    
+    [MaxLength(5)]
     public string? CurrencyName { get; set; }
 
     public Entities.Currency ToCurrency()

@@ -9,6 +9,7 @@ public class TransactionCategoryUpdateRequest
 
     [Required]
     [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Use letters only!")]
+    [MaxLength(30)]
     public string? CategoryName { get; set; }
 
     public Entities.TransactionCategory ToTransactionCategory()
